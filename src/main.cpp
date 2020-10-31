@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Session.h"
+#include "../headers/Session.h"
 
 using namespace std;
 
@@ -8,7 +8,8 @@ int main(int argc, char** argv){
         cout << "usage cTrace <config_path>" << endl;
         return 0;
     }
-    Session sess(argv[1]);
-    sess.simulate();
+    //Session sess(argv[1]);
+    //sess.simulate();
     return 0;
+    // aviram i am here
 }
