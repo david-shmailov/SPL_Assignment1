@@ -84,7 +84,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/david/CLionProjects/SPL-Assignment1/main.cpp">
+		<Unit filename="/mnt/c/Users/david/CLionProjects/SPL-Assignment1/src/main.cpp">
 			<Option target="SPL_Assignment1"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/david/CLionProjects/SPL-Assignment1/CMakeLists.txt">

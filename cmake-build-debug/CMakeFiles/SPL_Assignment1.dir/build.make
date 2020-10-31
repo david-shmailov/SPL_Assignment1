@@ -57,38 +57,38 @@ include CMakeFiles/SPL_Assignment1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/SPL_Assignment1.dir/flags.make
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.o: CMakeFiles/SPL_Assignment1.dir/flags.make
-CMakeFiles/SPL_Assignment1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/david/CLionProjects/SPL-Assignment1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SPL_Assignment1.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SPL_Assignment1.dir/main.cpp.o -c /mnt/c/Users/david/CLionProjects/SPL-Assignment1/main.cpp
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o: CMakeFiles/SPL_Assignment1.dir/flags.make
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/david/CLionProjects/SPL-Assignment1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o -c /mnt/c/Users/david/CLionProjects/SPL-Assignment1/src/main.cpp
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SPL_Assignment1.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/david/CLionProjects/SPL-Assignment1/main.cpp > CMakeFiles/SPL_Assignment1.dir/main.cpp.i
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SPL_Assignment1.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/david/CLionProjects/SPL-Assignment1/src/main.cpp > CMakeFiles/SPL_Assignment1.dir/src/main.cpp.i
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SPL_Assignment1.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/david/CLionProjects/SPL-Assignment1/main.cpp -o CMakeFiles/SPL_Assignment1.dir/main.cpp.s
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SPL_Assignment1.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/david/CLionProjects/SPL-Assignment1/src/main.cpp -o CMakeFiles/SPL_Assignment1.dir/src/main.cpp.s
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.o.requires:
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/SPL_Assignment1.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.requires
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.o.provides: CMakeFiles/SPL_Assignment1.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/SPL_Assignment1.dir/build.make CMakeFiles/SPL_Assignment1.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/SPL_Assignment1.dir/main.cpp.o.provides
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.provides: CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/SPL_Assignment1.dir/build.make CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.provides
 
-CMakeFiles/SPL_Assignment1.dir/main.cpp.o.provides.build: CMakeFiles/SPL_Assignment1.dir/main.cpp.o
+CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.provides.build: CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o
 
 
 # Object files for target SPL_Assignment1
 SPL_Assignment1_OBJECTS = \
-"CMakeFiles/SPL_Assignment1.dir/main.cpp.o"
+"CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o"
 
 # External object files for target SPL_Assignment1
 SPL_Assignment1_EXTERNAL_OBJECTS =
 
-SPL_Assignment1: CMakeFiles/SPL_Assignment1.dir/main.cpp.o
+SPL_Assignment1: CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o
 SPL_Assignment1: CMakeFiles/SPL_Assignment1.dir/build.make
 SPL_Assignment1: CMakeFiles/SPL_Assignment1.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/david/CLionProjects/SPL-Assignment1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SPL_Assignment1"
@@ -99,7 +99,7 @@ CMakeFiles/SPL_Assignment1.dir/build: SPL_Assignment1
 
 .PHONY : CMakeFiles/SPL_Assignment1.dir/build
 
-CMakeFiles/SPL_Assignment1.dir/requires: CMakeFiles/SPL_Assignment1.dir/main.cpp.o.requires
+CMakeFiles/SPL_Assignment1.dir/requires: CMakeFiles/SPL_Assignment1.dir/src/main.cpp.o.requires
 
 .PHONY : CMakeFiles/SPL_Assignment1.dir/requires
 
