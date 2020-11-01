@@ -3,8 +3,8 @@
 //
 
 #include "../headers/Session.h"
-
+void Session::Session(const std::string &path) {}
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
-void Session::addAgent(const Agent &agent) {agents.push_back(&agent);}
-void Session::setGraph(const Graph &graph) {g&graph;}
+void Session::addAgent(const Agent &agent) {agents.push_back(agent);}
+void Session::setGraph(const Graph &graph) {g=graph;}
 
