@@ -28,6 +28,7 @@ public:
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType();
+    std::vector<Agent*> getAgent() const;
 
 private:
     Graph g;
