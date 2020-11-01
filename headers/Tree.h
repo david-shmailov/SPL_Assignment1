@@ -17,6 +17,9 @@ public:
 
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
+
+    int
+
 private:
     int node;
     std::vector<Tree*> children;
@@ -34,6 +37,8 @@ class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
+private:
+    int findMaxRankNode(MaxRankTree* node, int max);
 };
 
 class RootTree: public Tree{
