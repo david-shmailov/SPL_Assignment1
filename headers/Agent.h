@@ -27,7 +27,6 @@ public:
 class Virus: public Agent{
 public:
     Virus(int nodeInd, Session& session);
-
     virtual void act();
 private:
     const int nodeInd;

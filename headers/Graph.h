@@ -13,8 +13,11 @@ public:
 
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
+    void isolateNode(int nodeInd);
+
 private:
     std::vector<std::vector<int>> edges;
+    std::vector<bool> infected;
 };
 
 #endif
