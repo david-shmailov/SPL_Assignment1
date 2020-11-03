@@ -10,9 +10,13 @@ int main(int argc, char** argv){
 
     if(argc != 2){
         cout << "usage cTrace <config_path>" << endl;
-        ifstream i("config1.json");
+
+        std::string s = "../1.json";
+        std::ifstream i(s);
+        std::cout << i.rdbuf()<<endl;
         json j;
-        j << i;
+        j << i.rdbuf();
+
         }
 
 
