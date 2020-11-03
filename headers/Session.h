@@ -50,7 +50,7 @@ private:
     TreeType treeType;
     std::vector<Agent*> agents;
     queue infected;
-    int Cycle;
+    int cycle;
 };
 
 

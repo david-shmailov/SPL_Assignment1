@@ -36,7 +36,7 @@ void Session::addAgent(const Agent &agent) {
     agents.push_back(&a);}
 void Session::setGraph(const Graph &graph) {g=graph;}
 
-int Session::getCycle() const {return Cycle;}
+int Session::getCycle() const {return cycle;}
 
 queue::queue() {i=new std::vector<int>;};
 bool queue::isEmpty() {i->empty();};
