@@ -4,10 +4,14 @@
 
 #ifndef SESSION_H_
 #define SESSION_H_
-
+#include <iostream>
+#include <fstream>
+#include "../headers/json.hpp"
 #include <vector>
 #include <string>
 #include "Graph.h"
+#include "Agent.h"
+
 class queue {
 public:
     queue();
@@ -18,8 +22,6 @@ public:
 private:
     std::vector<int> *i;
 };
-
-
 
 class Agent;
 
@@ -32,14 +34,15 @@ enum TreeType{
 class Session{
 public:
     Session(const std::string& path);
+    Session(const Session &session);
 
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-
+    int getCycle()const;
     void enqueueInfected(int i);
     int dequeueInfected();
-    TreeType getTreeType();
+    TreeType getTreeType() const;
     std::vector<Agent*> getAgent() const;
 
 private:
@@ -47,6 +50,9 @@ private:
     TreeType treeType;
     std::vector<Agent*> agents;
     queue infected;
+    int Cycle;
 };
+
+
 
 #endif
