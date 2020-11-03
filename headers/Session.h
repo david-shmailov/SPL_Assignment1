@@ -44,7 +44,7 @@ public:
     int getCycle()const;
     void enqueueInfected(int i);
     int dequeueInfected();
-    TreeType getTreeType() const; //TODO make sure the change to const type is allowed
+    TreeType getTreeType() const;
     Graph getGraph() const;
 
     std::vector<Agent*> getAgent() const;
