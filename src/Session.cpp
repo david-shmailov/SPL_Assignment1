@@ -5,6 +5,10 @@
 #include "../headers/Session.h"
 //void Session::Session(const std::string &path) {}//TODO
 //void Session::simulate() {}// TODO
+
+// ifstream i("config1.json");
+//        json j;
+//        j << i;
 void Session::enqueueInfected(int i) {infected.enqueue(i);}
 int Session::dequeueInfected() {
     int i= infected.peek();

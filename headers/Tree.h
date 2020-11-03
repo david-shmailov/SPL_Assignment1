@@ -18,7 +18,7 @@ public:
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
 
-    int
+    int;
 
 private:
     int node;
