@@ -1,26 +1,32 @@
 #include <iostream>
-#include "../headers/Session.h"
+//#include "../headers/Session.h"
 #include <fstream>
-#include "../headers/json.hpp"
+#include "json.hpp"
+//#include <nlohmann/json.hpp>
 
-using namespace std;
-using json = nlohmann::json;
+//using namespace std;
+//using json = nlohmann::json;
 
 int main(int argc, char** argv){
 
     if(argc != 2){
-        cout << "usage cTrace <config_path>" << endl;
+        std::cout << "usage cTrace <config_path>" << std::endl;
+//        std::string line;
+//        std::ifstream myfile ("//home//spl211//CLionProjects//SPL_Assignment1new//1.json");
+//        if (myfile.is_open())
+//        {
+//
+//            while ( getline (myfile, line) )
+//            {
+//                std::cout << line << '\n';
+//            }
+//            myfile.close();
+//        }
 
-        ifstream t("1.json");
-        json j;
-        j << t;
-        cout<< j["agent"]<< endl;
-
-//        std::string s = "../1.json";
-//        std::ifstream i(s);
-//        std::cout << i.rdbuf()<<endl;
-//        json j = i.rdbuf();
-//        cout << j["agents"]<< endl;
+        std::ifstream ifs("//home//spl211//CLionProjects//SPL_Assignment1new//1.json");
+        //std::cout << ifs << std::endl;
+        nlohmann::json jf = nlohmann::json::parse(ifs);
+       std::cout << jf["agents"]<< std::endl;
 
         }
 
