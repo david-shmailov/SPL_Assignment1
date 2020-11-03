@@ -20,11 +20,9 @@ public:
     static Tree* createTree(const Session& session, int rootLabel);
 
     static Tree* BFS(const Session& session, int rootLabel);
-    Tree* rectree(std::vector<std::vector<int>> &matrix,int numroot );
+
 
   //  virtual int traceTree()=0; TODO
-
-    int;
 
 protected:  //Dolav said we can change this to protected
     int node;
@@ -35,16 +33,22 @@ class CycleTree: public Tree{
 public:
     CycleTree(int rootLabel, int currCycle);
     virtual int traceTree();
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot, int cycle);
+
 private:
     int currCycle;
+
 };
 
 class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
+
 private:
     int findMaxRankNode(MaxRankTree* node, int max);
+
 };
 
 class RootTree: public Tree{
@@ -52,6 +56,9 @@ public:
     RootTree(int rootLabel);
     RootTree(const RootTree &tree);
     virtual int traceTree();
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
+
+
 };
 
 #endif
