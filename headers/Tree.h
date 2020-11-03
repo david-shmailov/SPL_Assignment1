@@ -6,7 +6,7 @@
 #define TREE_H_
 
 #include <vector>
-#include "session.h"
+#include "Session.h"
 
 class Session;
 
@@ -19,9 +19,10 @@ public:
 
     static Tree* createTree(const Session& session, int rootLabel);
 
-    static Tree* BFS(const Session& session, int rootLabel, TreeType type);
+    static Tree* BFS(const Session& session, int rootLabel);
+    Tree* rectree(std::vector<std::vector<int>> &matrix,int numroot );
 
-    virtual int traceTree()=0;
+  //  virtual int traceTree()=0; TODO
 
     int;
 

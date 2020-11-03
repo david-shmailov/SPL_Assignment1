@@ -50,6 +50,19 @@ Tree * Tree::BFS(const Session &session, int rootLabel) {
 }
 
 
+Tree* Tree::rectree(std::vector<std::vector<int>> &matrix, int numroot) {
+    Tree *root= new Tree(numroot);//TODO delete root
+    for (int j=0; j<matrix[numroot].size();j++ ){
+        if(matrix[numroot][j]==1){
+            matrix[numroot][j]=0;
+            matrix[j][numroot]=0;
+            Tree *t=rectree( matrix,j);
+            root->addChild(*t);
+        }
+    }
+    return root;
+}
+
 
 
 
@@ -69,7 +82,7 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 
 void Tree::addChild(const Tree &child) {
     Tree p = child; //TODO figure out what this error is
-    this->children.push_back(&p); //TODO first create a copy constructor for Tree
+    children.push_back(&p); //TODO first create a copy constructor for Tree
 }
 
 

@@ -11,11 +11,16 @@ int main(int argc, char** argv){
     if(argc != 2){
         cout << "usage cTrace <config_path>" << endl;
 
-        std::string s = "../1.json";
-        std::ifstream i(s);
-        std::cout << i.rdbuf()<<endl;
+        ifstream t("1.json");
         json j;
-        j << i.rdbuf();
+        j << t;
+        cout<< j["agent"]<< endl;
+
+//        std::string s = "../1.json";
+//        std::ifstream i(s);
+//        std::cout << i.rdbuf()<<endl;
+//        json j = i.rdbuf();
+//        cout << j["agents"]<< endl;
 
         }
 
