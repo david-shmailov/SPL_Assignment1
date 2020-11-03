@@ -11,6 +11,8 @@ bool Graph::isInfected(int nodeInd) {
     return infected[nodeInd];
 }
 
+std::vector<std::vector<int>> const Graph::getMatrix() {return edges;}
+
 void Graph::infectNode(int nodeInd) {
     this->infected[nodeInd] = true;
 }

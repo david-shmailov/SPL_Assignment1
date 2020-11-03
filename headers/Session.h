@@ -39,7 +39,9 @@ public:
 
     void enqueueInfected(int i);
     int dequeueInfected();
-    TreeType getTreeType();
+    TreeType getTreeType() const; //TODO make sure the change to const type is allowed
+    Graph getGraph() const;
+
     std::vector<Agent*> getAgent() const;
 
 private:

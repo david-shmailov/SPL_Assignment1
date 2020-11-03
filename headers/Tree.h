@@ -6,21 +6,26 @@
 #define TREE_H_
 
 #include <vector>
+#include "session.h"
 
 class Session;
 
 class Tree{
 public:
     Tree(int rootLabel);
+    Tree(const Tree &tree);
     void addChild(const Tree& child);
 
 
     static Tree* createTree(const Session& session, int rootLabel);
+
+    static Tree* BFS(const Session& session, int rootLabel, TreeType type);
+
     virtual int traceTree()=0;
 
     int;
 
-private:
+protected:  //Dolav said we can change this to protected
     int node;
     std::vector<Tree*> children;
 };
@@ -44,6 +49,7 @@ private:
 class RootTree: public Tree{
 public:
     RootTree(int rootLabel);
+    RootTree(const RootTree &tree);
     virtual int traceTree();
 };
 

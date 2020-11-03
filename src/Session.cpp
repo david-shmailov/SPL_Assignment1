@@ -15,9 +15,11 @@ int Session::dequeueInfected() {
     infected.dequeue();
     return i;}
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
-TreeType Session::getTreeType() {return treeType;}
+TreeType Session::getTreeType() const {return treeType;}
 void Session::addAgent(const Agent &agent) {agents.push_back(agent);}//Problem
 void Session::setGraph(const Graph &graph) {g=graph;}
+
+Graph Session::getGraph() const {return g;}
 
 
 

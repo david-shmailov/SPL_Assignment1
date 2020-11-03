@@ -1,6 +1,3 @@
-//
-// Created by David on 31/10/2020.
-//
 /*
     __ _____ _____ _____
  __|  |   __|     |   | |  JSON for Modern C++
@@ -6426,7 +6423,7 @@ bool get_ubjson_string(string_t& result, const bool get_char = true)
 {
 if (get_char)
 {
-get();  //
+get();  // TODO(niels): may we ignore N here?
 }
 
 if (JSON_HEDLEY_UNLIKELY(not unexpect_eof(input_format_t::ubjson, "value")))
