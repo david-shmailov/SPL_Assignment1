@@ -3,23 +3,32 @@
 //
 
 #include "../headers/Agent.h"
-Agent::Agent(Session& session): session(session) {};
-Agent::Agent(const Agent &copy):session(copy.session) {};
-Agent::Agent(Agent &&other):session(other.session ) {};
-const Agent & Agent::operator=(Agent &&other) {
+/////Agent/////
+Agent::Agent(Session& session): session(session) {};// constructor
+Agent::Agent(const Agent &copy):session(copy.session) {};// copy constructor
+Agent::Agent(Agent &&other):session(other.session ) {};// move constructor
+const Agent & Agent::operator=(Agent &&other) {//  move assignment operator
     session=other.session;
     return *this;
 };
-const Agent & Agent::operator=(const Agent &other) {
+const Agent & Agent::operator=(const Agent &other) {//assignment operator
     session=other.session;
     return *this;
 }
-
-
-
 //void Agent::act() {};// TODO
-Virus::Virus(int nodeInd,Session& session): nodeInd(nodeInd), Agent(session){};
-Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};
+
+//////Virus/////
+Virus::Virus(int nodeInd,Session& session): nodeInd(nodeInd), Agent(session){};// constructor
+Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};// copy constructor
+Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constructor
+const Virus & Virus::operator=(const Virus &other) {// assignment operator
+    nodeInd=other.nodeInd;///problem!!!
+
+}
+const Virus & Virus::operator=(Virus &&other) {//  move assignment operator
+    nodeInd=other.nodeInd;///problem!!! cant copy const
+
+}
 //void Virus::act() {};//TODO
 ContactTracer::ContactTracer(Session& session):Agent(session) {};
 ContactTracer::ContactTracer(const ContactTracer &a): Agent(a) {};

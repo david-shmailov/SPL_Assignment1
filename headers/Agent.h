@@ -1,11 +1,4 @@
 //
-// Created by David on 31/10/2020.
-//
-
-#ifndef AGENT_H_
-#define AGENT_H_
-
-#include <vector>
 #include "Session.h"
 class Session;
 class Agent{
@@ -24,8 +17,13 @@ private:
 
 class ContactTracer: public Agent{
 public:
-    ContactTracer(Session& session);
-    ContactTracer(const ContactTracer &a);
+    ContactTracer(Session& session);// constructor
+    ContactTracer(const ContactTracer & copy);// copy constructor
+    virtual ~ContactTracer()=default; // destructor
+    ContactTracer(ContactTracer&& other); // move constructor
+    const ContactTracer& operator =(const ContactTracer& other);// assignment operator
+    const ContactTracer& operator=(ContactTracer&& other);// move assignment operator
+
 
     virtual void act();
 };
@@ -33,8 +31,12 @@ public:
 
 class Virus: public Agent{
 public:
-    Virus(int nodeInd, Session& session);
-    Virus(const Virus &v);
+    Virus(int nodeInd, Session& session);//constructorVVV
+    Virus(const Virus & copy);// copy constructor
+    virtual ~Virus()=default; // destructor
+    Virus(Virus&& other); // move constructor
+    const Virus& operator =(const Virus& other);// assignment operator
+    const Virus& operator=(Virus&& other);// move assignment operator
     virtual void act();
 private:
     const int nodeInd;
