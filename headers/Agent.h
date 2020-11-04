@@ -9,6 +9,8 @@ public:
     Agent(Agent&& other); // move constructor
     const Agent& operator =(const Agent& other);// assignment operator
     const Agent& operator=(Agent&& other);// move assignment operator
+    void  setSession(const Agent& other);
+    const Session& getSession();
 
     virtual void act();
 private:
