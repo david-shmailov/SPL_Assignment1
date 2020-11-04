@@ -33,10 +33,14 @@ enum TreeType{
     Root
 };
 
-class Session{
+class Session{ // role of 5
 public:
-    Session(const std::string& path);
-    Session(const Session &session);
+    Session(const std::string& path); // constructor
+    Session(const Session & other); // copy constructor
+    virtual ~Session(); // destructor
+    Session(Session&& other); // move constructor
+    const Session& operator =(const Session& other);// assignment operator
+    const Session& operator=(Session&& other);// move assignment operator
 
     void simulate();
     void addAgent(const Agent& agent);
