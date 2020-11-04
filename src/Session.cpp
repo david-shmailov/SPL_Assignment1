@@ -6,7 +6,7 @@
 #include "json.hpp"
 #include "../headers/Session.h"
 #include "../headers/Graph.h"
-
+#include "../headers/Agent.h"
 using json = nlohmann::json;
 
 Session::Session(const std::string &path) {  // constructor
@@ -23,23 +23,62 @@ Session::Session(const std::string &path) {  // constructor
 
         if(elem[0]=="V") {
             enqueueInfected(elem[1]);// add the node initial to infected
-            Virus v( , elem[1] );/// TODO need to initial virus
+            Virus *v=new Virus(  elem[1],*this );// initial virus
+            agents.push_back(v);
             }
-        if(elem[0]=="C") ContactTracer t();///TODO  need to initial contactTracer
-
+        else if(elem[0]=="C") ContactTracer t();//initial contactTracer
+           ContactTracer *t=new ContactTracer(*this);
+           agents.push_back(t);
         }
 
 }
 
-Session::Session(const Session &other) {
-    g = Graph(other.getGraph());
+Session::Session(const Session &other) {// copy constructor
+     g = other.g;
     treeType=other.treeType;
-    for (int i=0; i<other.agents.size();i++){
-        Agent n= Agent(other.agents[i]);
-        agents.push_back(Agent(other.agents[i]));
+    cycle=other.cycle;
+    infected=other.infected;
+    for (auto * otherAgent : other.agents ){
+        Agent *n= new Agent(*otherAgent);
+        agents.push_back(n);
     }
+}
 
-} // copy constructor
+Session::~Session(){// destructor
+    for (auto * addAgent : this->agents ){
+        if(addAgent)
+        delete addAgent;
+    }
+    agents.clear();
+}
+
+Session::Session(Session &&other):g(other.g),treeType(other.treeType),cycle(other.cycle),
+                         infected(other.infected),agents(other.agents){}// move constructor
+
+const Session & Session::operator=(const Session &other) {// assignment operator
+    for (auto * addAgent : this->agents ){//delete the old agents
+        if(addAgent)
+            delete addAgent;
+    }
+    agents.clear();
+    for (auto * otherAgent : other.agents ){// add other's agents
+        agents.push_back(otherAgent);
+    }
+    g = other.g;
+    treeType=other.treeType;
+    cycle=other.cycle;
+    infected=other.infected;
+    return *this;
+
+}
+const Session & Session::operator=(Session &&other) {// move assignment operator
+    std::swap(other.agents,this->agents);
+    g=other.g;
+    treeType=other.treeType;
+    cycle=other.cycle;
+    infected=other.infected;
+    return *this;
+}
 
 
 void Session::simulate() {}// TODO

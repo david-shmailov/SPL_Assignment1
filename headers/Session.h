@@ -9,8 +9,11 @@
 #include "../headers/json.hpp"
 #include <vector>
 #include <string>
-#include "Graph.h"
-#include "Agent.h"
+
+
+class Agent;
+class Graph;
+
 
 class queue {
 public:

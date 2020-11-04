@@ -10,8 +10,12 @@
 class Session;
 class Agent{
 public:
-    Agent(Session& session);
-    Agent(const Agent & a);
+    Agent(Session& session);// constructor
+    Agent(const Agent & copy);// copy constructor
+    virtual ~Agent()=default; // destructor
+    Agent(Agent&& other); // move constructor
+    const Agent& operator =(const Agent& other);// assignment operator
+    const Agent& operator=(Agent&& other);// move assignment operator
 
     virtual void act();
 private:
