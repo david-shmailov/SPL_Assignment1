@@ -7,8 +7,8 @@ public:
     Agent(const Agent & copy);// copy constructor
     virtual ~Agent()=default; // destructor
     Agent(Agent&& other); // move constructor
-    const Agent& operator =(const Agent& other)=delete;// assignment operator
-    const Agent& operator=(Agent&& other)=delete;// move assignment operator
+    const Agent& operator =(const Agent& other);// assignment operator
+    const Agent& operator=(Agent&& other);// move assignment operator
     void  setSession(const Agent& other);
     const Session& getSession();
 
@@ -37,8 +37,8 @@ public:
     Virus(const Virus & copy);// copy constructor
     virtual ~Virus()=default; // destructor
     Virus(Virus&& other); // move constructor
-    const Virus& operator =(const Virus& other);// assignment operator
-    const Virus& operator=(Virus&& other);// move assignment operator
+    const Virus& operator =(const Virus& other)=delete;// assignment operator
+    const Virus& operator=(Virus&& other)=delete;// move assignment operator
     virtual void act();
 private:
     const int nodeInd;
