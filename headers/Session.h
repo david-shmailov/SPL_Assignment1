@@ -60,7 +60,7 @@ public:
     void enqueueInfected(int i);
     int dequeueInfected();
     TreeType getTreeType() const;
-    Graph getGraph() ;
+    Graph getGraph() const;
 
     std::vector<Agent*> getAgent() const;
 

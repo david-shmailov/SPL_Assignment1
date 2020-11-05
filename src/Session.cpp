@@ -17,7 +17,7 @@ Session::Session(const std::string &path):g(Graph()) {  // constructor
         j << i;
 
     std::vector<std::vector<int>> matrix =j["graph"];
-    //g(Graph(matrix)); // initial graph
+
     g = Graph(matrix);
     cycle=0;
     if(j["tree"]=='M') treeType=MaxRank; // initial treeType
@@ -89,7 +89,7 @@ const Session & Session::operator=(Session &&other) {// move assignment operator
 void Session::simulate() {}// TODO
 void Session::makefile() {// output function
     json j;
-    j["Graph"]=g.getMetrix();
+    j["Graph"]=g.getMatrix();
     std::vector<int> v;
     for(auto vl: v) v.push_back(vl);
     j["infected"]=v;
@@ -106,7 +106,7 @@ void Session::addAgent(const Agent &agent) {
     agents.push_back(&a);}
 void Session::setGraph(const Graph &graph) {g=graph;}
 
-Graph Session::getGraph()  {return g;}
+ Graph Session:: getGraph() const  {return g;}
 
 
 int Session::getCycle() const {return cycle;}
