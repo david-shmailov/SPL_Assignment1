@@ -3,20 +3,22 @@
 //
 #include <iostream>
 #include <fstream>
-#include "json.hpp"
+#include "../headers/json.hpp"
 #include "../headers/Session.h"
 #include "../headers/Graph.h"
 #include "../headers/Agent.h"
+
 using json = nlohmann::json;
 
 ////////Sessoin////////////
-Session::Session(const std::string &path) {  // constructor
+Session::Session(const std::string &path):g(Graph()) {  // constructor
     std::ifstream i("config1.json");// check this problem
         json j;
         j << i;
 
     std::vector<std::vector<int>> matrix =j["graph"];
-    g(Graph(matrix)); // initial graph
+    //g(Graph(matrix)); // initial graph
+    g = Graph(matrix);
     cycle=0;
     if(j["tree"]=='M') treeType=MaxRank; // initial treeType
     else if(j["tree"]=='R') treeType=Root;
@@ -32,6 +34,7 @@ Session::Session(const std::string &path) {  // constructor
            ContactTracer *t=new ContactTracer(*this);
            agents.push_back(t);
         }
+
 
 }
 

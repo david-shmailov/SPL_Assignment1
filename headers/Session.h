@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include "../headers/json.hpp"
+#include "Graph.h"
 #include <vector>
 #include <string>
 
