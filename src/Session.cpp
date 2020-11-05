@@ -16,7 +16,7 @@ Session::Session(const std::string &path) {  // constructor
         j << i;
 
     std::vector<std::vector<int>> matrix =j["graph"];
-    g= Graph(matrix); // initial graph
+    g=Graph(matrix); // initial graph
     cycle=0;
     if(j["tree"]=='M') treeType=MaxRank; // initial treeType
     else if(j["tree"]=='R') treeType=Root;
@@ -84,6 +84,13 @@ const Session & Session::operator=(Session &&other) {// move assignment operator
 
 
 void Session::simulate() {}// TODO
+void Session::makefile() {// output function
+    json j;
+    j["Graph"]=g.getMetrix();
+    std::vector<int> v;
+    for(auto vl: v) v.push_back(vl);
+    j["infected"]=v;
+}
 void Session::enqueueInfected(int i) {infected.enqueue(i);}
 int Session::dequeueInfected() {
     int i= infected.peek();
@@ -96,7 +103,7 @@ void Session::addAgent(const Agent &agent) {
     agents.push_back(&a);}
 void Session::setGraph(const Graph &graph) {g=graph;}
 
-Graph Session::getGraph() const {return g;}
+Graph Session::getGraph()  {return g;}
 
 
 int Session::getCycle() const {return cycle;}
@@ -105,8 +112,8 @@ int Session::getCycle() const {return cycle;}
 queue::queue() :i(0){};//constructor
 queue::queue(const queue &g) :i(g.i){};// copy constructor
 queue::queue(queue &&other):i(other.i) {};// move constructor
-const queue & queue::operator=(queue &&other) {i=other.i;}// assignment operator
-const queue & queue::operator=(const queue &other) {i=other.i;}// move assignment operator
+const queue & queue::operator=(queue &&other) {i=other.i; return *this;}// assignment operator
+const queue & queue::operator=(const queue &other) {i=other.i; return  *this;}// move assignment operator
 bool queue::isEmpty() {i.empty();};
 void queue::enqueue(int n){i.push_back(n);};
 int queue::peek() {i[0];}

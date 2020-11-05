@@ -3,18 +3,40 @@
 //
 
 #include "../headers/Tree.h"
-
+#include "../headers/Session.h"
+#include "../headers/Session.h"
 
 // abstract Tree:
+//////////Tree//////////////
+Tree::Tree(int rootLabel) :node(rootLabel) ,children(){};//constructor
 
-Tree::Tree(int rootLabel) :node(rootLabel) ,children(){};
-
-Tree::Tree(const Tree &tree) {
+Tree::Tree(const Tree &tree) {//copy constructor
     int node;
-    std::vector<Tree*> children;
     node = tree.node;
-    children = tree.children;
+    for(auto oldChildren : tree.children)
+        children.push_back(oldChildren);
 }
+Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
+Tree::~Tree() { //destructor
+    for(auto oldChildren : children)
+        delete oldChildren;
+    children.clear();
+}
+const Tree & Tree::operator=(const Tree &other) {//  assignment operator
+    node=other.node;
+    for(auto oldChildren : children)
+        delete oldChildren;
+    children.clear();
+    for(auto oldChildren : other.children)
+        children.push_back(oldChildren);
+    return *this;
+}
+const Tree & Tree::operator=(Tree &&other) {// move assignment operator
+    node=other.node;
+    std::swap(children,other.children);
+    return *this;
+}
+
 
 Tree * Tree::BFS(const Session &session, int rootLabel) {
 
@@ -77,11 +99,11 @@ void Tree::addChild(const Tree &child) {
 
 
 
-//RootTree:
+/////////////////////////RootTree////////////////////
 
-RootTree::RootTree(int rootLabel): Tree(rootLabel){}
-
-RootTree::RootTree(const RootTree &tree):Tree(tree) {}
+RootTree::RootTree(int rootLabel): Tree(rootLabel){}//constructor
+RootTree::RootTree(const RootTree &tree):Tree(tree) {}//copy constructor
+RootTree::RootTree(RootTree &&tree):Tree(tree) {}//move constructor
 
 Tree* RootTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
     Tree *root= new RootTree(numroot);//TODO delete root
@@ -101,11 +123,11 @@ int RootTree::traceTree() {return node;}
 
 
 
-//MaxRankTree:
+//////////////MaxRankTree/////////////////////
 
-MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel){}
-
-
+MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel){}//constructor
+MaxRankTree::MaxRankTree(const MaxRankTree &other):Tree(other) {}//copy constructor
+MaxRankTree::MaxRankTree(MaxRankTree &&other):Tree(other) {}//move constructor
 int MaxRankTree::traceTree() {
     MaxRankTree placeholder(5); //
     return this->findMaxRankNode(&placeholder,0); //TODO to implement
@@ -129,10 +151,11 @@ int MaxRankTree::findMaxRankNode(MaxRankTree *node, int max) {
     //current = findMaxRankNode(node->);
 }
 
-//CycleTree:
+/////////////CycleTree///////////////////
 
-CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};
-
+CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};//constructor
+CycleTree::CycleTree(const CycleTree &other):Tree(other),currCycle(other.currCycle) {}//copy constructor
+CycleTree::CycleTree(CycleTree &&other):Tree(other),currCycle(other.currCycle) {}//move constructor
 
 int CycleTree::traceTree() {
 

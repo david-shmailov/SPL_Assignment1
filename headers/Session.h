@@ -59,7 +59,7 @@ public:
     void enqueueInfected(int i);
     int dequeueInfected();
     TreeType getTreeType() const;
-    Graph getGraph() const;
+    Graph getGraph() ;
 
     std::vector<Agent*> getAgent() const;
 
@@ -69,6 +69,7 @@ private:
     std::vector<Agent*> agents;
     queue infected;
     int cycle;
+    void makefile();
 };
 
 #endif
