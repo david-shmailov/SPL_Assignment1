@@ -9,13 +9,15 @@
 #include "../headers/Agent.h"
 using json = nlohmann::json;
 
+////////Sessoin////////////
 Session::Session(const std::string &path) {  // constructor
     std::ifstream i("config1.json");// check this problem
         json j;
         j << i;
 
     std::vector<std::vector<int>> matrix =j["graph"];
-    g= Graph(matrix); // initial graph
+    g(Graph(matrix)); // initial graph
+    cycle=0;
     if(j["tree"]=='M') treeType=MaxRank; // initial treeType
     else if(j["tree"]=='R') treeType=Root;
     else if(j["tree"]=='C') treeType=Cycle;
@@ -56,9 +58,9 @@ Session::Session(Session &&other):g(other.g),treeType(other.treeType),cycle(othe
                          infected(other.infected),agents(other.agents){}// move constructor
 
 const Session & Session::operator=(const Session &other) {// assignment operator
-    for (auto * addAgent : this->agents ){//delete the old agents
-        if(addAgent)
-            delete addAgent;
+    for (auto * oldAgent : this->agents ){//delete the old agents
+        if(oldAgent)
+            delete oldAgent;
     }
     agents.clear();
     for (auto * otherAgent : other.agents ){// add other's agents
@@ -82,6 +84,13 @@ const Session & Session::operator=(Session &&other) {// move assignment operator
 
 
 void Session::simulate() {}// TODO
+void Session::makefile() {// output function
+    json j;
+    j["Graph"]=g.getMetrix();
+    std::vector<int> v;
+    for(auto vl: v) v.push_back(vl);
+    j["infected"]=v;
+}
 void Session::enqueueInfected(int i) {infected.enqueue(i);}
 int Session::dequeueInfected() {
     int i= infected.peek();
@@ -94,20 +103,24 @@ void Session::addAgent(const Agent &agent) {
     agents.push_back(&a);}
 void Session::setGraph(const Graph &graph) {g=graph;}
 
-Graph Session::getGraph() const {return g;}
+Graph Session::getGraph()  {return g;}
 
 
 int Session::getCycle() const {return cycle;}
 
-queue::queue() {i=new std::vector<int>;};
-bool queue::isEmpty() {i->empty();};
-void queue::enqueue(int n){i->push_back(n);};
-int queue::peek() {(*i)[0];}
+/////////// queue////////////
+queue::queue() :i(0){};//constructor
+queue::queue(const queue &g) :i(g.i){};// copy constructor
+queue::queue(queue &&other):i(other.i) {};// move constructor
+const queue & queue::operator=(queue &&other) {i=other.i; return *this;}// assignment operator
+const queue & queue::operator=(const queue &other) {i=other.i; return  *this;}// move assignment operator
+bool queue::isEmpty() {i.empty();};
+void queue::enqueue(int n){i.push_back(n);};
+int queue::peek() {i[0];}
 int queue::dequeue() {
-    for (int j=0;j<i->size()-1;j++)
-        (*i)[j]=(*i)[j+1];
-    i->pop_back();
-
+    for (int j=0;j<i.size()-1;j++)
+        i[j]=i[j+1];
+    i.pop_back();
 }
 
 
