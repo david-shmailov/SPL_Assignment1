@@ -23,14 +23,7 @@ void Agent::setSession(const Agent& other) {this->session=other.session;};
 Virus::Virus(int nodeInd,Session& session): nodeInd(nodeInd), Agent(session){};// constructor
 Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};// copy constructor
 Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constructor
-const Virus & Virus::operator=(const Virus &other) {// assignment operator
-    nodeInd=other.nodeInd;///problem!!!cant copy const
-    setSession(other.getSession());////problem
-}
-const Virus & Virus::operator=(Virus &&other) {//  move assignment operator
-    nodeInd=other.nodeInd;///problem!!! cant copy const
 
-}
 
 //void Virus::act() {};//TODO
 
@@ -39,12 +32,6 @@ const Virus & Virus::operator=(Virus &&other) {//  move assignment operator
 ContactTracer::ContactTracer(Session& session):Agent(session) {};// constructor
 ContactTracer::ContactTracer(const ContactTracer &a): Agent(a) {};// copy constructor
 ContactTracer::ContactTracer(ContactTracer &&other):ContactTracer(other){}// move constructor
-const ContactTracer & ContactTracer::operator=(const ContactTracer &other) {// assignment operator
 
-
-}
-const ContactTracer & ContactTracer::operator=(ContactTracer &&other) {//  move assignment operator
-
-}
 //void Virus::act() {};//TODO
 //void ContactTracer::act() {};//TODO

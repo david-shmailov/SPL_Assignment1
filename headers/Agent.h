@@ -7,8 +7,8 @@ public:
     Agent(const Agent & copy);// copy constructor
     virtual ~Agent()=default; // destructor
     Agent(Agent&& other); // move constructor
-    const Agent& operator =(const Agent& other);// assignment operator
-    const Agent& operator=(Agent&& other);// move assignment operator
+    const Agent& operator =(const Agent& other)=delete;// assignment operator
+    const Agent& operator=(Agent&& other)=delete;// move assignment operator
     void  setSession(const Agent& other);
     const Session& getSession();
 
@@ -23,8 +23,8 @@ public:
     ContactTracer(const ContactTracer & copy);// copy constructor
     virtual ~ContactTracer()=default; // destructor
     ContactTracer(ContactTracer&& other); // move constructor
-    const ContactTracer& operator =(const ContactTracer& other);// assignment operator
-    const ContactTracer& operator=(ContactTracer&& other);// move assignment operator
+    const ContactTracer& operator =(const ContactTracer& other)=delete;// assignment operator
+    const ContactTracer& operator=(ContactTracer&& other)=delete;// move assignment operator
 
 
     virtual void act();
