@@ -15,15 +15,22 @@ class Agent;
 class Graph;
 
 
-class queue {
+class queue {// role of 5
 public:
-    queue();
+    queue();//constructor
+    queue(const queue& g);// copy constructor
+    virtual ~queue()=default; // destructor
+    queue(queue&& other);// move constructor
+    const queue& operator =(const queue& other);// assignment operator
+    const queue& operator=(queue&& other);// move assignment operator
+
+
     void enqueue(int n);
     int dequeue();
     int peek();
     bool isEmpty();
 private:
-    std::vector<int> *i;
+    std::vector<int> i;/// to check if need to change to pointer
 };
 
 
