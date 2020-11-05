@@ -16,17 +16,25 @@ public:
     Tree(const Tree &tree);
     void addChild(const Tree& child);
 
-
+    int const getRank();
     static Tree* createTree(const Session& session, int rootLabel);
+    int const getNode();
+    virtual Tree& traverse(int _depth)=0; //TODO reconsider the decision to make this a public Tree method
 
-    static Tree* BFS(const Session& session, int rootLabel);
+    virtual int traceTree()=0; //TODO
 
 
-  //  virtual int traceTree()=0; TODO
+    int const getDepth();
+    void setDepth(int _depth);
+
+
 
 protected:  //Dolav said we can change this to protected
     int node;
+    int depth=0;
     std::vector<Tree*> children;
+
+
 };
 
 class CycleTree: public Tree{
@@ -34,6 +42,8 @@ public:
     CycleTree(int rootLabel, int currCycle);
     virtual int traceTree();
     static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot, int cycle);
+    virtual Tree& traverse(int num);
+
 
 private:
     int currCycle;
@@ -45,9 +55,7 @@ public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
     static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
-
-private:
-    int findMaxRankNode(MaxRankTree* node, int max);
+    virtual Tree& traverse(int _depth);
 
 };
 
@@ -56,7 +64,8 @@ public:
     RootTree(int rootLabel);
     RootTree(const RootTree &tree);
     virtual int traceTree();
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot); //TODO consider making this private.
+    virtual Tree& traverse(int num);
 
 
 };

@@ -5,7 +5,7 @@
 #include "../headers/Tree.h"
 
 
-// abstract Tree:
+/// abstract Tree:
 
 Tree::Tree(int rootLabel) :node(rootLabel) ,children(){};
 
@@ -16,7 +16,23 @@ Tree::Tree(const Tree &tree) {
     children = tree.children;
 }
 
-Tree * Tree::BFS(const Session &session, int rootLabel) {
+int const Tree::getNode(){
+    return node;
+}
+
+int const Tree::getRank(){return children.size();}
+
+int const Tree::getDepth(){
+    return depth;
+}
+
+void Tree::setDepth(int _depth){
+    depth = _depth;
+}
+
+
+
+Tree * Tree::createTree(const Session &session, int rootLabel) {
 
     Graph g = session.getGraph(); //edges //TODO may need to be deleted
     std::vector<std::vector<int>> edges = g.getMatrix();//edges //TODO make sure this uses copy constructor and does not give a pointer of the original matrix
@@ -40,44 +56,25 @@ Tree * Tree::BFS(const Session &session, int rootLabel) {
     }
     TreeType type = session.getTreeType();
     Tree* tree;
+    //now to construct recursively Tree out of BFSTree matrix
     switch (type) {
         case Root: tree = RootTree::recTree(BFSTree,rootLabel);break;
         case Cycle: tree = CycleTree::recTree(BFSTree,rootLabel,session.getCycle());break;
         case MaxRank: tree = MaxRankTree::recTree(BFSTree,rootLabel);break;
     }//TODO remember to delete this BFS somewhere.
-    //now to construct recursively Tree out of BFSTree matrix
+
     return tree;
 }
 
-
-
-
-
-
-
-Tree * Tree::createTree(const Session &session, int rootLabel) {
-    TreeType type = session.getTreeType();
-    switch (type){
-        case (Root):
-            break;
-        case (MaxRank):
-            break;
-        case (Cycle):
-            break;
-    }
-
-
-}
-
 void Tree::addChild(const Tree &child) {
-    Tree p = child; //TODO figure out what this error is
-    children.push_back(&p); //TODO first create a copy constructor for Tree
+    Tree p = child;
+    children.push_back(&p);
 }
 
 
 
 
-//RootTree:
+/// RootTree:
 
 RootTree::RootTree(int rootLabel): Tree(rootLabel){}
 
@@ -95,21 +92,43 @@ Tree* RootTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
     }
     return root;
 }
+Tree& RootTree::traverse(int num) {return *this;}
 
 int RootTree::traceTree() {return node;}
 
 
 
 
-//MaxRankTree:
+/// MaxRankTree:
 
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel){}
 
 
 int MaxRankTree::traceTree() {
-    MaxRankTree placeholder(5); //
-    return this->findMaxRankNode(&placeholder,0); //TODO to implement
+    return this->traverse(0).getNode();
 }
+
+Tree& MaxRankTree::traverse(int _depth) {
+
+        int maxRank=children.size();
+        if (maxRank == 0){ return *this;}
+        int minDepth = depth;
+        this->depth=_depth;
+        Tree& currTree = *this;
+        for(int i =0; i<children.size(); i++){
+            Tree& nextTree = children[i]->traverse(_depth++);
+            if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
+                minDepth = nextTree.getDepth();
+                currTree = nextTree; // TODO attempt to lower traverse times
+                maxRank = currTree.getRank();
+            }
+        }
+       return currTree;
+
+}
+
+
+
 
 Tree* MaxRankTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
     Tree *root= new MaxRankTree(numroot);//TODO delete root
@@ -124,19 +143,20 @@ Tree* MaxRankTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
     return root;
 }
 
-int MaxRankTree::findMaxRankNode(MaxRankTree *node, int max) {
-    int current = 0;
-    //current = findMaxRankNode(node->);
-}
 
-//CycleTree:
+/// CycleTree:
 
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};
 
 
 int CycleTree::traceTree() {
-
+    return this->traverse(currCycle).getNode() ;
 };
+
+Tree& CycleTree::traverse(int num) {
+    if (this->children[0] && num >0 ) return this->children[0]->traverse(num-1);
+    else return *this;
+}
 
 Tree* CycleTree::recTree(std::vector<std::vector<int>> &matrix, int numroot, int cycle ) {
     Tree *root= new CycleTree(numroot,cycle);//TODO delete root
