@@ -19,9 +19,9 @@ Session::Session(const std::string& path):g(Graph()) {  // constructor
 
     g = Graph(matrix);
     cycle=0;
-    if(j["tree"]=='M') treeType=MaxRank; // initial treeType
-    else if(j["tree"]=='R') treeType=Root;
-    else if(j["tree"]=='C') treeType=Cycle;
+    if(j["tree"]=="M") treeType=MaxRank; // initial treeType
+    else if(j["tree"]=="R") treeType=Root;
+    else if(j["tree"]=="C") treeType=Cycle;
     for (auto elem: j["agents"]){
         if(elem[0]=="V") {
             g.set_isNonVirusFree(elem[1]);
@@ -34,6 +34,7 @@ Session::Session(const std::string& path):g(Graph()) {  // constructor
             non_virus_free.push_back(t);
         }
     }
+     infected=queue();
 
 
 }
@@ -51,6 +52,7 @@ Session::Session(const Session &other) {// copy constructor
         Agent *n = otherAgent->clone();
         non_virus_free.push_back(n);
     }
+    infected=queue();
 }
 
 Session::~Session(){// destructor
@@ -153,10 +155,10 @@ queue::queue(const queue &g) :i(g.i){};// copy constructor
 queue::queue(queue &&other):i(other.i) {};// move constructor
 const queue & queue::operator=(queue &&other) {i=other.i; return *this;}// assignment operator
 const queue & queue::operator=(const queue &other) {i=other.i; return  *this;}// move assignment operator
-bool queue::isEmpty() {i.empty();};
+bool queue::isEmpty() {return i.empty();};
 void queue::enqueue(int n){i.push_back(n);};
-int queue::peek() {i[0];}
-int queue::dequeue() {
+int queue::peek() {return i[0];}
+void queue::dequeue() {
     for (int j=0;j<i.size()-1;j++)
         i[j]=i[j+1];
     i.pop_back();

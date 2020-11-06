@@ -29,7 +29,7 @@ public:
 
 
     void enqueue(int n);
-    int dequeue();
+    void dequeue();
     int peek();
     bool isEmpty();
 private:
