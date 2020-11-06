@@ -123,7 +123,9 @@ void Session::makefile() {// output function
     json j;
     j["Graph"]=g.getMatrix();
     std::vector<int> v;
-    for(auto vl: v) v.push_back(vl);
+    for(int i=0;i<g.getMatrix().size();i++){
+        if(g.isInfected(i)) v.push_back(i);
+    }
     j["infected"]=v;
     std::ofstream i("output.json");
     j>>i;
