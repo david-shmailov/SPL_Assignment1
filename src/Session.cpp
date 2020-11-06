@@ -26,16 +26,16 @@ Session::Session(const std::string &path):g(Graph()) {  // constructor
     for (auto elem: j["agents"]){
 
         if(elem[0]=="V") {
-            enqueueInfected(elem[1]);// add the node initial to infected
+            g.set_isNonVirusFree(elem[1]);
             Virus *v=new Virus(  elem[1],*this );// initial virus
-            agents.push_back(v);
+            non_virus_free.push_back(v);
         }
         else if(elem[0]=="C") ContactTracer t();//initial contactTracer
         ContactTracer *t=new ContactTracer(*this);
-        agents.push_back(t);
+        non_virus_free.push_back(t);
     }
 
-    ////need to initial non_virus_free
+
 }
 
 Session::Session(const Session &other) {// copy constructor
@@ -44,9 +44,12 @@ Session::Session(const Session &other) {// copy constructor
     cycle=other.cycle;
     infected=other.infected;
     for (auto * otherAgent : other.agents ){
-        Agent *n = new Agent(*otherAgent);
+        Agent *n = otherAgent->clone();
         agents.push_back(n);
-        ////need to copy non_virus_free
+    }
+    for (auto * otherAgent : other.non_virus_free ){
+        Agent *n = otherAgent->clone();
+        non_virus_free.push_back(n);
     }
 }
 
@@ -129,7 +132,7 @@ std::vector<Agent *> Session::getAgent() const{ return  agents;}
 void Session::addAgent(const Agent &agent) {
     Agent* clone = agent.clone();//TODO remember to delete this agent somewhere.
     agents.push_back(clone);
-}}
+}
 
 TreeType Session::getTreeType() const {return treeType;}
 
