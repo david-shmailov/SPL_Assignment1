@@ -4,6 +4,7 @@
 
 #include "../headers/Graph.h"
 #include <vector>
+
 // TODO test this
 Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix) //constructor
         , infected(std::vector<bool> (edges.size(),false))

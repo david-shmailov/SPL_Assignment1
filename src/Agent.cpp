@@ -3,7 +3,8 @@
 //
 
 #include "../headers/Agent.h"
-#include "../headers/Tree.h"
+
+
 ///////////////Agent//////////////
 Agent::Agent() {};// constructor
 Agent::Agent(const Agent &copy){};// copy constructor

@@ -3,10 +3,8 @@
 //
 #include <iostream>
 #include <fstream>
-#include "../headers/json.hpp"
 #include "../headers/Session.h"
-#include "../headers/Graph.h"
-#include "../headers/Agent.h"
+
 
 using json = nlohmann::json;
 
@@ -27,11 +25,11 @@ Session::Session(const std::string &path):g(Graph()) {  // constructor
 
         if(elem[0]=="V") {
             g.set_isNonVirusFree(elem[1]);
-            Virus *v=new Virus(  elem[1],*this );// initial virus
+            Virus *v=new Virus(elem[1]);// initial virus
             non_virus_free.push_back(v);
         }
         else if(elem[0]=="C") ContactTracer t();//initial contactTracer
-        ContactTracer *t=new ContactTracer(*this);
+        ContactTracer *t=new ContactTracer();
         non_virus_free.push_back(t);
     }
 

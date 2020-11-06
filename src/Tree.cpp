@@ -3,8 +3,6 @@
 //
 
 #include "../headers/Tree.h"
-#include "../headers/Session.h"
-#include "../headers/Session.h"
 
 // abstract Tree:
 //////////Tree//////////////

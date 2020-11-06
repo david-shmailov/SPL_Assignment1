@@ -4,10 +4,12 @@
 
 #ifndef SESSION_H_
 #define SESSION_H_
+
 #include <iostream>
 #include <fstream>
-#include "../headers/json.hpp"
+#include "json.hpp"
 #include "Graph.h"
+#include "Agent.h"
 #include <vector>
 #include <string>
 
