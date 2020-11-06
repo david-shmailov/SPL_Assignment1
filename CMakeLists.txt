@@ -4,11 +4,11 @@ project(SPL_Assignment1)
 set(CMAKE_CXX_STANDARD 11)
 
 set(PROJECT_HEADERS
-        headers/Agent.h
-        headers/Graph.h
-        headers/json.hpp
-        headers/Session.h
-        headers/Tree.h
+        include/Agent.h
+        include/Graph.h
+        include/json.hpp
+        include/Session.h
+        include/Tree.h
         )
 set(PROJECT_SOURCES
         src/main.cpp

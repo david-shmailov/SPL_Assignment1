@@ -2,7 +2,7 @@
 // Created by David on 31/10/2020.
 //
 
-#include "../headers/Tree.h"
+#include "../include/Tree.h"
 
 // abstract Tree:
 //////////Tree//////////////
@@ -21,7 +21,7 @@ Tree::~Tree() { //destructor
         delete oldChildren;}
     children.clear();
 }
-const Tree & Tree::operator=(const Tree &other) {//  assignment operator
+const Tree& Tree::operator=(const Tree &other) {//  assignment operator
     this->node=other.node;
     for(auto oldChildren : children)
         delete oldChildren;

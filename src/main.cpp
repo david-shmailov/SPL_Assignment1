@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../headers/Session.h"
+#include "../include/Session.h"
 #include <fstream>
 
 
@@ -24,4 +24,4 @@ int main(int argc, char** argv){
   //
 
 
-    // TODO change headers folder to include before submission
+    // TODO change include folder to include before submission
