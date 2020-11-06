@@ -24,7 +24,7 @@ public:
 
     bool isNonVirusFree(int nodeInd );
     void set_isNonVirusFree(int nodeInd);
-
+    void reset_isNonVirusFree(int i);
 
 private:
     std::vector<std::vector<int>> edges;

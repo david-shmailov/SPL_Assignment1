@@ -86,8 +86,8 @@ const Session & Session::operator=(const Session &other) {// assignment operator
     cycle=other.cycle;
     infected=other.infected;
     return *this;
-
 }
+
 const Session & Session::operator=(Session &&other) {// move assignment operator
     std::swap(other.agents,this->agents);
     std::swap(other.non_virus_free,this->non_virus_free);
