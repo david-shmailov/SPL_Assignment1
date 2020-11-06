@@ -125,6 +125,8 @@ void Session::makefile() {// output function
     std::vector<int> v;
     for(auto vl: v) v.push_back(vl);
     j["infected"]=v;
+    std::ofstream i("output.json");
+    j>>i;
 }
 
 void Session::enqueueInfected(int i) {infected.enqueue(i);}
