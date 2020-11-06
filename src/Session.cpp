@@ -109,12 +109,14 @@ void Session::simulate() {
         cycle++;
         for (auto inAgent : non_virus_free) {
             agents.push_back(inAgent); //append the non_virus_free with agent
+        }
         non_virus_free.clear(); // clear this cycle non_virus_free
         for (auto curAgent : agents)
             curAgent->act(*this);
     }
     Session::makefile();
-}
+ }
+
 
 
 void Session::makefile() {// output function
@@ -141,7 +143,8 @@ void Session::addAgent(const Agent &agent) {
 TreeType Session::getTreeType() const {return treeType;}
 
 void Session::setGraph(const Graph &graph) {g=graph;}
-Graph Session::getGraph() const {return g;}
+Graph Session::getGraphConst() const  {return g;}
+Graph & Session::getGraph() {return g;}
 
 void Session::addNon_virus_free(Agent *nonVirusFree) {non_virus_free.push_back(nonVirusFree);}///change it to const
 

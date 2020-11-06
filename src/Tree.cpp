@@ -52,7 +52,7 @@ void Tree::setDepth(int _depth){
 }
 
 Tree * Tree::BFS(const Session &session, int rootLabel){
-    Graph g=session.getGraph(); //edges //TODO may need to be deleted
+    Graph g=session.getGraphConst(); //edges //TODO may need to be deleted
     std::vector<std::vector<int>> edges = g.getMatrix();//edges //TODO make sure this uses copy constructor and does not give a pointer of the original matrix
     std::vector<std::vector<int>> BFSTree(edges.size(), std::vector<int>(edges.size(), 0)); // init 2D nxn matrix of 0s on stack. //TODO make sure this is on stack
     std::vector<bool> visited = std::vector<bool>(edges.size(), false);

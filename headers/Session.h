@@ -59,8 +59,8 @@ public:
     void addAgent(const Agent& agent);
 
     void setGraph(const Graph& graph);
-    Graph getGraph() const;
-
+    Graph getGraphConst() const;
+    Graph & getGraph();
     int getCycle()const;
 
     void enqueueInfected(int i);
