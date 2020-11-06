@@ -22,9 +22,14 @@ public:
     bool isInfected(int nodeInd);
     void isolateNode(int nodeInd);
 
+    bool isNonVirusFree(int nodeInd );
+    void set_isNonVirusFree(int nodeInd);
+
+
 private:
     std::vector<std::vector<int>> edges;
     std::vector<bool> infected;
+    std::vector<bool> isNon_virus_free;
 };
 
 #endif

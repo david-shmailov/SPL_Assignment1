@@ -6,7 +6,7 @@
 #include <vector>
 // TODO test this
 Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix) //constructor
-                                       , infected(std::vector<bool> (edges.size(),false)) {}
+        , infected(std::vector<bool> (edges.size(),false)) {}
 Graph::Graph(){}
 Graph::Graph(const Graph &g) : edges(g.edges),infected(g.infected){};//copy constructor
 Graph::Graph(Graph &&other):edges(other.edges),infected(other.infected) {}//move constructor
@@ -39,7 +39,8 @@ void Graph::isolateNode(int nodeInd) {
     }
 }
 
-
+bool Graph::isNonVirusFree(int i) {return isNon_virus_free[i]== true;}
+void Graph::set_isNonVirusFree(int i) {isNon_virus_free[i]=true;}
 
 
 

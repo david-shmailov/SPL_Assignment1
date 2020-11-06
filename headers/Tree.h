@@ -10,36 +10,28 @@
 
 class Session;
 
-class Tree{
+class Tree{ //role of 5
 public:
-    ///rule of 5
     Tree(int rootLabel);//constructor
     Tree(const Tree &tree);// copy constructor
     virtual ~Tree();//destructor
     Tree(Tree && other);//move constructor
     const Tree& operator =(const Tree& other);// assignment operator
-    const Tree& operator=(Tree&& other);// move assignment operator TODO make sure const is at the right position
-
-
-    ///Getters:
-    int  getRank() const;
-    int  getNode() const;
-    int  getDepth() const;
-
-    ///Setters:
-    void setDepth(int _depth);
+    const Tree& operator=(Tree&& other);// move assignment operator
     void addChild(const Tree& child);
 
-    ///static functions:
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int rootLabel, const Session& session); //TODO consider making this private.
+    int const getRank();
     static Tree* createTree(const Session& session, int rootLabel);
     static Tree* BFS(const Session&, int rootLabel);
-
-    ///virtual functions:
-
+    int const getNode();
     virtual Tree& traverse(int _depth)=0; //TODO reconsider the decision to make this a public Tree method
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int rootLabel, const Session& session); //TODO consider making this private.
     virtual int traceTree()=0; //TODO
-    virtual Tree* clone() const =0;
+
+
+    int const getDepth();
+    void setDepth(int _depth);
+
 
 
 protected:  //Dolav said we can change this to protected
@@ -57,8 +49,8 @@ public:
     const CycleTree& operator =(const CycleTree& other)=delete;// assignment operator
     const CycleTree& operator=(CycleTree&& other)=delete;// move assignment operator
     virtual int traceTree();
+    //static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot, int cycle);
     virtual Tree& traverse(int num);
-    virtual Tree* clone() const;
 
 
 private:
@@ -75,8 +67,8 @@ public:
     const MaxRankTree& operator =(const MaxRankTree& other)=delete;// assignment operator
     const MaxRankTree& operator=(MaxRankTree&& other)=delete;// move assignment operator
     virtual int traceTree();
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
     virtual Tree& traverse(int _depth);
-    virtual Tree* clone() const;
 
 };
 
@@ -89,8 +81,9 @@ public:
     const RootTree& operator =(const RootTree& other)=delete;// assignment operator
     const RootTree& operator=(RootTree&& other)=delete;// move assignment operator
     virtual int traceTree();
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot); //TODO consider making this private.
     virtual Tree& traverse(int num);
-    virtual Tree* clone() const;
+
 
 };
 

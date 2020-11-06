@@ -38,13 +38,13 @@ const Tree & Tree::operator=(Tree &&other) {// move assignment operator
 }
 
 
-int  Tree::getNode() const{
+int const Tree::getNode(){
     return node;
 }
 
-int  Tree::getRank() const {return children.size();}
+int const Tree::getRank(){return children.size();}
 
-int  Tree::getDepth() const{
+int const Tree::getDepth(){
     return depth;
 }
 
@@ -76,14 +76,18 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
     TreeType type = session.getTreeType();
     Tree* tree;
     //now to construct recursively Tree out of BFSTree matrix
-    //TODO remember to delete this BFS somewhere.
+    switch (type) {
+        case Root: tree = RootTree::recTree(BFSTree,rootLabel);break;
+        case Cycle: tree = CycleTree::recTree(BFSTree,rootLabel,session.getCycle());break;
+        case MaxRank: tree = MaxRankTree::recTree(BFSTree,rootLabel);break;
+    }//TODO remember to delete this BFS somewhere.
 
-    return Tree::recTree(BFSTree,rootLabel,session);
+    return tree;
 }
 
 void Tree::addChild(const Tree &child) {
-    Tree* clone = child.clone();
-    children.push_back(clone);
+    Tree p = child;
+    children.push_back(&p);
 }
 
 Tree * Tree::createTree(const Session &session, int rootLabel) {
@@ -101,19 +105,6 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 
 }
 
-Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
-    Tree *root= createTree(session,rootLabel);//TODO delete root
-    for (int j=0; j<matrix[rootLabel].size();j++ ){
-        if(matrix[rootLabel][j]==1){
-            matrix[rootLabel][j]=0;
-            matrix[j][rootLabel]=0;
-            Tree *t=recTree( matrix,j,session);
-            root->addChild(*t);
-        }
-    }
-    return root;
-}
-
 
 
 
@@ -123,11 +114,18 @@ RootTree::RootTree(int rootLabel): Tree(rootLabel){}//constructor
 RootTree::RootTree(const RootTree &tree):Tree(tree) {}//copy constructor
 RootTree::RootTree(RootTree &&tree):Tree(tree) {}//move constructor
 
-Tree* RootTree::clone() const {
-    RootTree* clone = new RootTree(*this);
-    return clone;
+Tree* RootTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
+    Tree *root= new RootTree(numroot);//TODO delete root
+    for (int j=0; j<matrix[numroot].size();j++ ){
+        if(matrix[numroot][j]==1){
+            matrix[numroot][j]=0;
+            matrix[j][numroot]=0;
+            Tree *t=recTree( matrix,j);
+            root->addChild(*t);
+        }
+    }
+    return root;
 }
-
 Tree& RootTree::traverse(int num) {return *this;}
 
 int RootTree::traceTree() {return node;}
@@ -146,26 +144,37 @@ int MaxRankTree::traceTree() {
 
 Tree& MaxRankTree::traverse(int _depth) {
 
-        int maxRank=children.size();
-        if (maxRank == 0){ return *this;}
-        int minDepth = depth;
-        this->depth=_depth;
-        Tree& currTree = *this;
-        for(int i =0; i<children.size(); i++){
-            Tree& nextTree = children[i]->traverse(_depth++);
-            if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
-                minDepth = nextTree.getDepth();
-                currTree = nextTree; // TODO attempt to lower traverse times
-                maxRank = currTree.getRank();
-            }
+    int maxRank=children.size();
+    if (maxRank == 0){ return *this;}
+    int minDepth = depth;
+    this->depth=_depth;
+    Tree& currTree = *this;
+    for(int i =0; i<children.size(); i++){
+        Tree& nextTree = children[i]->traverse(_depth++);
+        if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
+            minDepth = nextTree.getDepth();
+            currTree = nextTree; // TODO attempt to lower traverse times
+            maxRank = currTree.getRank();
         }
-       return currTree;
+    }
+    return currTree;
 
 }
 
-Tree* MaxRankTree::clone() const {
-    MaxRankTree* clone = new MaxRankTree(*this);
-    return clone;
+
+
+
+Tree* MaxRankTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
+    Tree *root= new MaxRankTree(numroot);//TODO delete root
+    for (int j=0; j<matrix[numroot].size();j++ ){
+        if(matrix[numroot][j]==1){
+            matrix[numroot][j]=0;
+            matrix[j][numroot]=0;
+            Tree *t=recTree( matrix,j);
+            root->addChild(*t);
+        }
+    }
+    return root;
 }
 
 
@@ -174,11 +183,6 @@ Tree* MaxRankTree::clone() const {
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};//constructor
 CycleTree::CycleTree(const CycleTree &other):Tree(other),currCycle(other.currCycle) {}//copy constructor
 CycleTree::CycleTree(CycleTree &&other):Tree(other),currCycle(other.currCycle) {}//move constructor
-
-Tree* CycleTree::clone() const {
-    CycleTree* clone = new CycleTree(*this);
-    return clone;
-}
 
 int CycleTree::traceTree() {
     return this->traverse(currCycle).getNode() ;
@@ -189,5 +193,16 @@ Tree& CycleTree::traverse(int num) {
     else return *this;
 }
 
-
+Tree* CycleTree::recTree(std::vector<std::vector<int>> &matrix, int numroot, int cycle ) {
+    Tree *root= new CycleTree(numroot,cycle);//TODO delete root
+    for (int j=0; j<matrix[numroot].size();j++ ){
+        if(matrix[numroot][j]==1){
+            matrix[numroot][j]=0;
+            matrix[j][numroot]=0;
+            Tree *t=recTree( matrix,j,cycle);
+            root->addChild(*t);
+        }
+    }
+    return root;
+}
 

@@ -2,20 +2,17 @@
 #ifndef AGENT_H_
 #define AGENT_H_
 #include "Session.h"
+class Tree;
 class Session;
 class Agent{
 public:
-    ///rule of 5
     Agent();// constructor
     Agent(const Agent & copy);// copy constructor
     virtual ~Agent()=default; // destructor
     Agent(Agent&& other); // move constructor
     const Agent& operator =(const Agent& other);// assignment operator
-    const Agent& operator=(Agent&& other);// move assignment operatorz
-
-    ///virtual functions:
+    const Agent& operator=(Agent&& other);// move assignment operator
     virtual void act(Session& session)=0;
-    virtual Agent* clone() const =0;
 
 };
 
@@ -30,7 +27,6 @@ public:
 
 
     virtual void act(Session& session);
-    virtual Agent* clone() const;
 };
 
 
@@ -42,10 +38,7 @@ public:
     Virus(Virus&& other); // move constructor
     const Virus& operator =(const Virus& other)=delete;// assignment operator
     const Virus& operator=(Virus&& other)=delete;// move assignment operator
-
-
     virtual void act(Session& session);
-    virtual Agent* clone() const;
 private:
     const int nodeInd;
 };

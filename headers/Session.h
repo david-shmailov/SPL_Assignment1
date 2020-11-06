@@ -55,12 +55,18 @@ public:
 
     void simulate();
     void addAgent(const Agent& agent);
+
     void setGraph(const Graph& graph);
+    Graph getGraph() const;
+
     int getCycle()const;
+
     void enqueueInfected(int i);
     int dequeueInfected();
+
     TreeType getTreeType() const;
-    Graph getGraph() const;
+
+    void addNon_virus_free(Agent* nonVirusFree);//change it to const
 
     std::vector<Agent*> getAgent() const;
 
@@ -70,6 +76,8 @@ private:
     std::vector<Agent*> agents;
     queue infected;
     int cycle;
+    std::vector<Agent*> non_virus_free;
+
     void makefile();
 };
 
