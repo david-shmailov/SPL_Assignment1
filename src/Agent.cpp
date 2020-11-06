@@ -38,7 +38,7 @@ void Virus::act(Session& session) {
             && !session.getGraph().isInfected(i)) { //check if this node is not infected
             Virus *v= new Virus(i); // create new virus
             session.addNon_virus_free(v); // add it to Non_virus_free
-            session.getGraph().set_isNonVirusFree(nodeInd);// is non_virus_free
+            session.getGraph().set_isNonVirusFree(i);// is non_virus_free
             break;
         }
     }
