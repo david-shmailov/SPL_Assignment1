@@ -10,16 +10,18 @@ Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix) //constructor
         , infected(std::vector<bool> (edges.size(),false))
         ,isNon_virus_free(std::vector<bool> (edges.size(),false)){}
 Graph::Graph(){}
-Graph::Graph(const Graph &g) : edges(g.edges),infected(g.infected){};//copy constructor
-Graph::Graph(Graph &&other):edges(other.edges),infected(other.infected) {}//move constructor
+Graph::Graph(const Graph &g) : edges(g.edges),infected(g.infected),isNon_virus_free(g.isNon_virus_free){} ;//copy constructor
+Graph::Graph(Graph &&other):edges(other.edges),infected(other.infected),isNon_virus_free(other.isNon_virus_free) {}//move constructor
 const Graph & Graph::operator=(const Graph &other) { // assignment operator
     edges=other.edges;
     infected=other.infected;
+    isNon_virus_free=other.isNon_virus_free;
     return *this;
 }
 const Graph & Graph::operator=(Graph &&other) {// move assignment operator
     edges=other.edges;
     infected=other.infected;
+    isNon_virus_free=other.isNon_virus_free;
     return *this;
 }
 

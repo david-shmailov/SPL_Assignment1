@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <fstream>
+
 #include "../headers/Session.h"
 
 
@@ -10,7 +11,7 @@ using json = nlohmann::json;
 
 ////////Sessoin////////////
 Session::Session(const std::string& path):g(Graph()) {  // constructor
-    std::ifstream i("config1.json");// check this problem
+    std::ifstream i(path);// check this problem
     json j;
     j << i;
 
@@ -22,15 +23,17 @@ Session::Session(const std::string& path):g(Graph()) {  // constructor
     else if(j["tree"]=='R') treeType=Root;
     else if(j["tree"]=='C') treeType=Cycle;
     for (auto elem: j["agents"]){
-
         if(elem[0]=="V") {
+            std::cout<< elem[1]<<std::endl;
             g.set_isNonVirusFree(elem[1]);
             Virus *v=new Virus(elem[1]);// initial virus
             non_virus_free.push_back(v);
         }
-        else if(elem[0]=="C") ContactTracer t();//initial contactTracer
-        ContactTracer *t=new ContactTracer();
-        non_virus_free.push_back(t);
+        else if(elem[0]=="C") {
+
+            ContactTracer *t = new ContactTracer();
+            non_virus_free.push_back(t);
+        }
     }
 
 

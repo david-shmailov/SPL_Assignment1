@@ -1,9 +1,10 @@
 //
 #ifndef AGENT_H_
 #define AGENT_H_
-#include "Session.h"
+//#include "Session.h"
 #include "Tree.h"
 
+class Session;
 class Agent{
 public:
     ///rule of 5
