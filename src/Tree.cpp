@@ -76,13 +76,9 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
     TreeType type = session.getTreeType();
     Tree* tree;
     //now to construct recursively Tree out of BFSTree matrix
-    switch (type) {
-        case Root: tree = RootTree::recTree(BFSTree,rootLabel);break;
-        case Cycle: tree = CycleTree::recTree(BFSTree,rootLabel,session.getCycle());break;
-        case MaxRank: tree = MaxRankTree::recTree(BFSTree,rootLabel);break;
-    }//TODO remember to delete this BFS somewhere.
+    //TODO remember to delete this BFS somewhere.
 
-    return tree;
+    return Tree::recTree(BFSTree,rootLabel,session);
 }
 
 void Tree::addChild(const Tree &child) {
@@ -105,6 +101,19 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 
 }
 
+Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
+    Tree *root= createTree(session,rootLabel);//TODO delete root
+    for (int j=0; j<matrix[rootLabel].size();j++ ){
+        if(matrix[rootLabel][j]==1){
+            matrix[rootLabel][j]=0;
+            matrix[j][rootLabel]=0;
+            Tree *t=recTree( matrix,j,session);
+            root->addChild(*t);
+        }
+    }
+    return root;
+}
+
 
 
 
@@ -114,18 +123,7 @@ RootTree::RootTree(int rootLabel): Tree(rootLabel){}//constructor
 RootTree::RootTree(const RootTree &tree):Tree(tree) {}//copy constructor
 RootTree::RootTree(RootTree &&tree):Tree(tree) {}//move constructor
 
-Tree* RootTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
-    Tree *root= new RootTree(numroot);//TODO delete root
-    for (int j=0; j<matrix[numroot].size();j++ ){
-        if(matrix[numroot][j]==1){
-            matrix[numroot][j]=0;
-            matrix[j][numroot]=0;
-            Tree *t=recTree( matrix,j);
-            root->addChild(*t);
-        }
-    }
-    return root;
-}
+
 
 Tree& RootTree::traverse(int num) {return *this;}
 
@@ -163,22 +161,6 @@ Tree& MaxRankTree::traverse(int _depth) {
 }
 
 
-
-
-Tree* MaxRankTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
-    Tree *root= new MaxRankTree(numroot);//TODO delete root
-    for (int j=0; j<matrix[numroot].size();j++ ){
-        if(matrix[numroot][j]==1){
-            matrix[numroot][j]=0;
-            matrix[j][numroot]=0;
-            Tree *t=recTree( matrix,j);
-            root->addChild(*t);
-        }
-    }
-    return root;
-}
-
-
 /////////////CycleTree///////////////////
 
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};//constructor
@@ -194,16 +176,4 @@ Tree& CycleTree::traverse(int num) {
     else return *this;
 }
 
-Tree* CycleTree::recTree(std::vector<std::vector<int>> &matrix, int numroot, int cycle ) {
-    Tree *root= new CycleTree(numroot,cycle);//TODO delete root
-    for (int j=0; j<matrix[numroot].size();j++ ){
-        if(matrix[numroot][j]==1){
-            matrix[numroot][j]=0;
-            matrix[j][numroot]=0;
-            Tree *t=recTree( matrix,j,cycle);
-            root->addChild(*t);
-        }
-    }
-    return root;
-}
 

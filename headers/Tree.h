@@ -67,7 +67,7 @@ public:
     const MaxRankTree& operator =(const MaxRankTree& other)=delete;// assignment operator
     const MaxRankTree& operator=(MaxRankTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
+    //static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot);
     virtual Tree& traverse(int _depth);
 
 };
@@ -81,7 +81,7 @@ public:
     const RootTree& operator =(const RootTree& other)=delete;// assignment operator
     const RootTree& operator=(RootTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot); //TODO consider making this private.
+    //static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot); //TODO consider making this private.
     virtual Tree& traverse(int num);
 
 
