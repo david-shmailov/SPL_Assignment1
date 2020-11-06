@@ -9,7 +9,7 @@
 using json = nlohmann::json;
 
 ////////Sessoin////////////
-Session::Session(const std::string &path):g(Graph()) {  // constructor
+Session::Session(const std::string& path):g(Graph()) {  // constructor
     std::ifstream i("config1.json");// check this problem
     json j;
     j << i;
