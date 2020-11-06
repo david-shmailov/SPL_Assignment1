@@ -1,8 +1,8 @@
 all: main
 
-main: bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o bin/json.o
+main: bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree
 	@echo 'Linking'
-	g++ -o bin/main bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o bin/json.o
+	g++ -o bin/main bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o
 	
 bin/main.o: src/main.cpp
 	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/main.o src/main.cpp
@@ -20,8 +20,6 @@ bin/Session.o: src/Session.cpp
 bin/Tree.o: src/Tree.cpp
 	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Tree.o src/Tree.cpp
 
-bin/json.o: headers/json.hpp
-	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/json.o headers/json.hpp
 	
 
 
