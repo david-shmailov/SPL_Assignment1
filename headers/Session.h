@@ -65,7 +65,7 @@ public:
 
     void enqueueInfected(int i);
     int dequeueInfected();
-
+    bool isEmptyQueue();
     TreeType getTreeType() const;
 
     void addNon_virus_free(Agent* nonVirusFree);//change it to const

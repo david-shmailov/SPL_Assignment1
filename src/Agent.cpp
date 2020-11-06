@@ -54,6 +54,7 @@ Agent* ContactTracer::clone() const {
     return clone;
 }
 void ContactTracer::act(Session& session) {
+    if(sessio)
     Tree *curTree=Tree::BFS(session,session.dequeueInfected());
     int nodeIso = (*curTree).traceTree();
     session.getGraph().isolateNode(nodeIso);

@@ -24,7 +24,6 @@ Session::Session(const std::string& path):g(Graph()) {  // constructor
     else if(j["tree"]=='C') treeType=Cycle;
     for (auto elem: j["agents"]){
         if(elem[0]=="V") {
-            std::cout<< elem[1]<<std::endl;
             g.set_isNonVirusFree(elem[1]);
             Virus *v=new Virus(elem[1]);// initial virus
             non_virus_free.push_back(v);
@@ -104,7 +103,7 @@ const Session & Session::operator=(Session &&other) {// move assignment operator
 
 
 void Session::simulate() {
-    while (non_virus_free.empty()) {
+    while (!non_virus_free.empty()) {
         cycle++;
         for (auto inAgent : non_virus_free) {
             agents.push_back(inAgent); //append the non_virus_free with agent
@@ -130,6 +129,7 @@ int Session::dequeueInfected() {
     int i= infected.peek();
     infected.dequeue();
     return i;}
+bool Session::isEmptyQueue() {infected.isEmpty();}
 
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
 void Session::addAgent(const Agent &agent) {
