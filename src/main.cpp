@@ -10,8 +10,8 @@ int main(int argc, char** argv){
 
     if(argc != 2){
         std::cout << "usage cTrace <config_path>" << std::endl;
-        const std::string s= "//home//spl211//CLionProjects//SPL_Assignment1//config1.json";
-        Session sess(s); //TODO add in CLion parameters config1.file
+        //const std::string s= "//home//spl211//CLionProjects//SPL_Assignment1//config1.json";
+        Session sess(argv[1]); //TODO add in CLion parameters config1.file
         sess.simulate();
        }
 
