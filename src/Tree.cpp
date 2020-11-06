@@ -38,13 +38,13 @@ const Tree & Tree::operator=(Tree &&other) {// move assignment operator
 }
 
 
-int const Tree::getNode(){
+int  Tree::getNode() const{
     return node;
 }
 
-int const Tree::getRank(){return children.size();}
+int  Tree::getRank() const {return children.size();}
 
-int const Tree::getDepth(){
+int  Tree::getDepth() const{
     return depth;
 }
 
@@ -82,8 +82,8 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
 }
 
 void Tree::addChild(const Tree &child) {
-    Tree p = child;
-    children.push_back(&p);
+    Tree* clone = child.clone();
+    children.push_back(clone);
 }
 
 Tree * Tree::createTree(const Session &session, int rootLabel) {
@@ -123,7 +123,10 @@ RootTree::RootTree(int rootLabel): Tree(rootLabel){}//constructor
 RootTree::RootTree(const RootTree &tree):Tree(tree) {}//copy constructor
 RootTree::RootTree(RootTree &&tree):Tree(tree) {}//move constructor
 
-
+Tree* RootTree::clone() const {
+    RootTree* clone = new RootTree(*this);
+    return clone;
+}
 
 Tree& RootTree::traverse(int num) {return *this;}
 
@@ -160,12 +163,22 @@ Tree& MaxRankTree::traverse(int _depth) {
 
 }
 
+Tree* MaxRankTree::clone() const {
+    MaxRankTree* clone = new MaxRankTree(*this);
+    return clone;
+}
+
 
 /////////////CycleTree///////////////////
 
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle) {};//constructor
 CycleTree::CycleTree(const CycleTree &other):Tree(other),currCycle(other.currCycle) {}//copy constructor
 CycleTree::CycleTree(CycleTree &&other):Tree(other),currCycle(other.currCycle) {}//move constructor
+
+Tree* CycleTree::clone() const {
+    CycleTree* clone = new CycleTree(*this);
+    return clone;
+}
 
 int CycleTree::traceTree() {
     return this->traverse(currCycle).getNode() ;
@@ -175,5 +188,6 @@ Tree& CycleTree::traverse(int num) {
     if (this->children[0] && num >0 ) return this->children[0]->traverse(num-1);
     else return *this;
 }
+
 
 
