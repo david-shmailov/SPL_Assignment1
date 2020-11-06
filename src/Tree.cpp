@@ -16,8 +16,9 @@ Tree::Tree(const Tree &tree) {//copy constructor
 }
 Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
 Tree::~Tree() { //destructor
-    for(auto oldChildren : children)
-        delete oldChildren;
+    for(auto oldChildren : this->children){
+        if(oldChildren)
+        delete oldChildren;}
     children.clear();
 }
 const Tree & Tree::operator=(const Tree &other) {//  assignment operator
@@ -107,7 +108,6 @@ Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const S
             matrix[j][rootLabel]=0;
             Tree *t=recTree( matrix,j,session);
             root->addChild(*t);
-            delete t;
         }
     }
     return root;
