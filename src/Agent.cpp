@@ -20,6 +20,10 @@ Virus::Virus(int nodeInd,Session& session): nodeInd(nodeInd), Agent(){};// const
 Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};// copy constructor
 Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constructor
 
+Agent* Virus::clone() const{
+    Virus* clone = new Virus(*this);
+    return clone;
+}
 
 //void Virus::act() {};//TODO
 
@@ -28,5 +32,10 @@ Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constr
 ContactTracer::ContactTracer(Session& session):Agent {};// constructor
 ContactTracer::ContactTracer(const ContactTracer &a): Agent(a) {};// copy constructor
 ContactTracer::ContactTracer(ContactTracer &&other):ContactTracer(other){}// move constructor
+
+Agent* ContactTracer::clone() const {
+    ContactTracer* clone = new ContactTracer(*this);
+    return clone;
+}
 
 //void ContactTracer::act() {};//TODO
