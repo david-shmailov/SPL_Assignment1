@@ -52,10 +52,7 @@ void Tree::setDepth(int _depth){
     depth = _depth;
 }
 
-
-
-Tree * Tree::createTree(const Session &session, int rootLabel) {
-
+Tree * Tree::BFS(const Session &session, int rootLabel){
     Graph g=session.getGraph(); //edges //TODO may need to be deleted
     std::vector<std::vector<int>> edges = g.getMatrix();//edges //TODO make sure this uses copy constructor and does not give a pointer of the original matrix
     std::vector<std::vector<int>> BFSTree(edges.size(), std::vector<int>(edges.size(), 0)); // init 2D nxn matrix of 0s on stack. //TODO make sure this is on stack
@@ -89,9 +86,23 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 }
 
 void Tree::addChild(const Tree &child) {
-    if(child.)
-    Tree *p=new Tree(child);
-    children.push_back(p);
+    Tree p = child;
+    children.push_back(&p);
+}
+
+Tree * Tree::createTree(const Session &session, int rootLabel) {
+    switch (session.getTreeType()) {
+        case Root:
+            return new RootTree(rootLabel);
+            break;
+        case MaxRank:
+            return new MaxRankTree(rootLabel);
+            break;
+        case Cycle:
+            return new CycleTree(rootLabel, session.getCycle());
+            break;
+    }//TODO remember to make sure this is deleted somewhere.
+
 }
 
 
@@ -115,6 +126,7 @@ Tree* RootTree::recTree(std::vector<std::vector<int>> &matrix, int numroot) {
     }
     return root;
 }
+
 Tree& RootTree::traverse(int num) {return *this;}
 
 int RootTree::traceTree() {return node;}

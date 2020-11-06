@@ -22,9 +22,10 @@ public:
 
     int const getRank();
     static Tree* createTree(const Session& session, int rootLabel);
+    static Tree* BFS(const Session&, int rootLabel);
     int const getNode();
     virtual Tree& traverse(int _depth)=0; //TODO reconsider the decision to make this a public Tree method
-
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int rootLabel, const Session& session); //TODO consider making this private.
     virtual int traceTree()=0; //TODO
 
 
@@ -48,7 +49,7 @@ public:
     const CycleTree& operator =(const CycleTree& other)=delete;// assignment operator
     const CycleTree& operator=(CycleTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot, int cycle);
+    //static Tree* recTree(std::vector<std::vector<int>> &matrix,int numroot, int cycle);
     virtual Tree& traverse(int num);
 
 

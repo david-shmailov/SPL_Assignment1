@@ -1,5 +1,6 @@
 //
 #ifndef AGENT_H_
+#define AGENT_H_
 #include "Session.h"
 class Session;
 class Agent{

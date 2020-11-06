@@ -44,7 +44,7 @@ Session::Session(const Session &other) {// copy constructor
     cycle=other.cycle;
     infected=other.infected;
     for (auto * otherAgent : other.agents ){
-        Agent *n= new Agent(*otherAgent);
+        Agent *n = new Agent(*otherAgent);
         agents.push_back(n);
     }
 }
@@ -101,12 +101,14 @@ int Session::dequeueInfected() {
     return i;}
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
 TreeType Session::getTreeType() const {return treeType;}
+
 void Session::addAgent(const Agent &agent) {
     Agent a = agent;
     agents.push_back(&a);}
+
 void Session::setGraph(const Graph &graph) {g=graph;}
 
- Graph Session:: getGraph() const  {return g;}
+Graph Session::getGraph() const {return g;}
 
 
 int Session::getCycle() const {return cycle;}
