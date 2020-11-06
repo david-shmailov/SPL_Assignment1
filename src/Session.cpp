@@ -127,8 +127,9 @@ int Session::dequeueInfected() {
 
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
 void Session::addAgent(const Agent &agent) {
-    Agent a = agent;
-    agents.push_back(&a);}
+    Agent* clone = agent.clone();//TODO remember to delete this agent somewhere.
+    agents.push_back(clone);
+}}
 
 TreeType Session::getTreeType() const {return treeType;}
 
