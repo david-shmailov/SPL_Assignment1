@@ -22,7 +22,7 @@ public:
 
 class ContactTracer: public Agent{
 public:
-    ContactTracer(Session& session);// constructor
+    ContactTracer();// constructor
     ContactTracer(const ContactTracer & copy);// copy constructor
     virtual ~ContactTracer()=default; // destructor
     ContactTracer(ContactTracer&& other); // move constructor
@@ -37,7 +37,7 @@ public:
 
 class Virus: public Agent{
 public:
-    Virus(int nodeInd, Session& session);//constructorVVV
+    Virus(int nodeInd);//constructorVVV
     Virus(const Virus & copy);// copy constructor
     virtual ~Virus()=default; // destructor
     Virus(Virus&& other); // move constructor

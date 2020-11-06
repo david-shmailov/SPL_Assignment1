@@ -17,7 +17,7 @@ const Agent & Agent::operator=(const Agent &other) {//assignment operator
 
 
 //////////////////Virus/////////////////
-Virus::Virus(int nodeInd,Session& session): nodeInd(nodeInd), Agent(){};// constructor
+Virus::Virus(int nodeInd): nodeInd(nodeInd), Agent(){};// constructor
 Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};// copy constructor
 Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constructor
 Agent* Virus::clone() const{
@@ -35,8 +35,7 @@ void Virus::act(Session& session) {
         if (session.getGraph().getMatrix()[nodeInd][i] == 1 // check if this node is neighbor
             && !session.getGraph().isNonVirusFree(i) //check if not NonVirusFree
             && !session.getGraph().isInfected(i)) { //check if this node is not infected
-
-            Virus *v= new Virus(i,session); // create new virus
+            Virus *v= new Virus(i); // create new virus
             session.addNon_virus_free(v); // add it to Non_virus_free
             session.getGraph().set_isNonVirusFree(nodeInd);// is non_virus_free
             break;
@@ -46,7 +45,7 @@ void Virus::act(Session& session) {
 
 
 ////////////ContactTracer////////////////
-ContactTracer::ContactTracer(Session& session):Agent() {};// constructor
+ContactTracer::ContactTracer():Agent() {};// constructor
 ContactTracer::ContactTracer(const ContactTracer &a): Agent(a) {};// copy constructor
 ContactTracer::ContactTracer(ContactTracer &&other):ContactTracer(other){}// move constructor
 Agent* ContactTracer::clone() const {

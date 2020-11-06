@@ -60,11 +60,16 @@ Session::~Session(){// destructor
     }
     agents.clear();
 }
-
 Session::Session(Session &&other):g(other.g),treeType(other.treeType),cycle(other.cycle),
-                                  infected(other.infected),agents(other.agents),non_virus_free(other.non_virus_free){}// move constructor
+     infected(other.infected),agents(other.agents),non_virus_free(other.non_virus_free){}// move constructor
+
+
 
 const Session & Session::operator=(const Session &other) {// assignment operator
+    g = other.g;
+    treeType=other.treeType;
+    cycle=other.cycle;
+    infected=other.infected;
     for (auto * oldAgent : this->agents ){//delete the old agents
         if(oldAgent)
             delete oldAgent;
@@ -78,16 +83,13 @@ const Session & Session::operator=(const Session &other) {// assignment operator
             delete oldAgent;
     }
     non_virus_free.clear();
-    for (auto * otherAgent : other.non_virus_free ){// add other's agents
+    for (auto * otherAgent : other.non_virus_free ) {// add other's agents
         non_virus_free.push_back(otherAgent);
     }
-    g = other.g;
-    treeType=other.treeType;
-    cycle=other.cycle;
-    infected=other.infected;
-    return *this;
-}
 
+    return *this;
+
+}
 const Session & Session::operator=(Session &&other) {// move assignment operator
     std::swap(other.agents,this->agents);
     std::swap(other.non_virus_free,this->non_virus_free);
