@@ -9,25 +9,28 @@
 Tree::Tree(int rootLabel) :node(rootLabel) ,children(){};//constructor
 
 Tree::Tree(const Tree &tree) {//copy constructor
-    int node;
-    this->node = tree.node;
-    for(auto oldChildren : tree.children)
-        children.push_back(oldChildren);
+    node = tree.node;
+    for(auto oldChildren : tree.children) {
+        if(oldChildren){
+            Tree *t=oldChildren->clone();
+        this->children.push_back(t);
+    }}
 }
 Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
 Tree::~Tree() { //destructor
-    for(auto oldChildren : this->children){
-        if(oldChildren)
-        delete oldChildren;}
-    children.clear();
+    for(auto oldChildren : children){
+       // if(oldChildren)
+        delete oldChildren;
+    }
+     children.clear();
 }
 const Tree & Tree::operator=(const Tree &other) {//  assignment operator
-    this->node=other.node;
+     this->node=other.node;
     for(auto oldChildren : children)
         delete oldChildren;
-    children.clear();
+    this->children.clear();
     for(auto oldChildren : other.children)
-        children.push_back(oldChildren);
+        this->children.push_back(oldChildren);
     return *this;
 }
 const Tree & Tree::operator=(Tree &&other) {// move assignment operator
@@ -82,7 +85,7 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
 
 void Tree::addChild(const Tree &child) {
     Tree* clone = child.clone();
-    children.push_back(clone);
+    this->children.push_back(clone);
 }
 
 Tree * Tree::createTree(const Session &session, int rootLabel) {
@@ -101,13 +104,16 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 }
 
 Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
-    Tree *root= createTree(session,rootLabel);//TODO delete root
+    Tree *root=createTree(session,rootLabel);//TODO delete root
     for (int j=0; j<matrix[rootLabel].size();j++ ){
         if(matrix[rootLabel][j]==1){
             matrix[rootLabel][j]=0;
             matrix[j][rootLabel]=0;
             Tree *t=recTree( matrix,j,session);
+            if(t){
             root->addChild(*t);
+            delete t;
+            }
         }
     }
     return root;
