@@ -2,7 +2,7 @@
 // Created by David on 31/10/2020.
 //
 
-#include "../headers/Tree.h"
+#include "../include/Tree.h"
 
 // abstract Tree:
 //////////Tree//////////////
@@ -85,7 +85,7 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
 
 void Tree::addChild(const Tree &child) {
     Tree* clone = child.clone();
-    this->children.push_back(clone);
+    children.push_back(clone);
 }
 
 Tree * Tree::createTree(const Session &session, int rootLabel) {
@@ -104,7 +104,7 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 }
 
 Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
-    Tree *root=createTree(session,rootLabel);//TODO delete root
+    Tree *root= createTree(session,rootLabel);//TODO delete root
     for (int j=0; j<matrix[rootLabel].size();j++ ){
         if(matrix[rootLabel][j]==1){
             matrix[rootLabel][j]=0;
