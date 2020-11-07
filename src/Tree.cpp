@@ -19,8 +19,10 @@ Tree::Tree(const Tree &tree) {//copy constructor
 Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
 Tree::~Tree() { //destructor
     for(auto oldChildren : children){
-       // if(oldChildren)
-        delete oldChildren;
+        if(oldChildren){
+            delete oldChildren;
+        }
+
     }
      children.clear();
 }
