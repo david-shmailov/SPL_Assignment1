@@ -139,8 +139,8 @@ int Session::dequeueInfected() {
 bool Session::isEmptyQueue() {infected.isEmpty();}
 
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
-void Session::addAgent(const Agent &agent) {
-    Agent* clone = agent.clone();//TODO remember to delete this agent somewhere.
+void Session::addAgent(const Agent &agent) {// remember to delete this agent after call this function
+    Agent* clone = agent.clone();
     agents.push_back(clone);
 }
 
