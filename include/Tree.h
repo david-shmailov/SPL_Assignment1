@@ -38,7 +38,7 @@ public:
     ///virtual functions:
 
     virtual Tree& traverse(int _depth)=0; //TODO reconsider the decision to make this a public Tree method
-    virtual int traceTree()=0; //TODO
+    virtual int traceTree()=0; //
     virtual Tree* clone() const =0;
 
 

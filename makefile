@@ -25,10 +25,5 @@ clean:
 	@echo 'Cleaning'
 	rm -f bin/*
 
-	
 
-
-clean:
-	@echo 'Cleaning'
-	rm -f bin/*
 

@@ -14,7 +14,8 @@ Tree::Tree(const Tree &tree) {//copy constructor
         if(oldChildren){
             Tree *t=oldChildren->clone();
         this->children.push_back(t);
-    }}
+        }
+    }
 }
 Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
 Tree::~Tree() { //destructor
