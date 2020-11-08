@@ -69,7 +69,8 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
     while (!queue.empty()) {
         visiting = queue[0];
         queue.erase(queue.begin());
-        for (int i = 0; i < edges.size(); i++) {
+        int size=edges.size();
+        for (int i = 0; i < size; i++) {
             if (edges[visiting][i] == 1 && (!visited[i])) { //TODO implement the note from the assignment about visit order by indicies
                 queue.push_back(i);
                 visited[i] = true;
@@ -78,9 +79,6 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
             }
         }
     }
-    TreeType type = session.getTreeType();
-    Tree* tree;
-    //now to construct recursively Tree out of BFSTree matrix
 
 
     return Tree::recTree(BFSTree,rootLabel,session);
@@ -103,12 +101,13 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
             return new CycleTree(rootLabel, session.getCycle());
             break;
     }//TODO remember to make sure this is deleted somewhere.
-
+    return nullptr;
 }
 
 Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
     Tree *root= createTree(session,rootLabel);//TODO delete root
-    for (int j=0; j<matrix[rootLabel].size();j++ ){
+    int size=matrix[rootLabel].size();
+    for (int j=0; j<size;j++ ){
         if(matrix[rootLabel][j]==1){
             matrix[rootLabel][j]=0;
             matrix[j][rootLabel]=0;
@@ -159,7 +158,8 @@ Tree& MaxRankTree::traverse(int _depth) {
     int minDepth = depth;
     this->depth=_depth;
     Tree& currTree = *this;
-    for(int i =0; i<children.size(); i++){
+    int size=children.size();
+    for(int i =0; i<size; i++){
         Tree& nextTree = children[i]->traverse(_depth++);
         if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
             minDepth = nextTree.getDepth();

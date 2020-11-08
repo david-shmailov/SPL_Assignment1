@@ -13,7 +13,7 @@ using json = nlohmann::json;
 Session::Session(const std::string& path):g(Graph()) {  // constructor
     std::ifstream i(path);// check this problem
     json j;
-    j << i;
+    j=json ::parse(i);
 
     std::vector<std::vector<int>> matrix =j["graph"];
 
@@ -123,7 +123,8 @@ void Session::makefile() {// output function
     json j;
     j["Graph"]=g.getMatrix();
     std::vector<int> v;
-    for(int i=0;i<g.getMatrix().size();i++){
+    int size=g.getMatrix().size();
+    for(int i=0;i<size;i++){
         if(g.isInfected(i)) v.push_back(i);
     }
     j["infected"]=v;
@@ -136,7 +137,7 @@ int Session::dequeueInfected() {
     int i= infected.peek();
     infected.dequeue();
     return i;}
-bool Session::isEmptyQueue() {infected.isEmpty();}
+bool Session::isEmptyQueue() {return infected.isEmpty();}
 
 std::vector<Agent *> Session::getAgent() const{ return  agents;}
 void Session::addAgent(const Agent &agent) {// remember to delete this agent after call this function
@@ -165,7 +166,8 @@ bool queue::isEmpty() {return i.empty();};
 void queue::enqueue(int n){i.push_back(n);};
 int queue::peek() {return i[0];}
 void queue::dequeue() {
-    for (int j=0;j<i.size()-1;j++)
+    int size=i.size()-1;
+    for (int j=0;j<size;j++)
         i[j]=i[j+1];
     i.pop_back();
 }

@@ -32,7 +32,8 @@ void Virus::act(Session& session) {
         session.enqueueInfected(nodeInd);//in to queue infected
         session.getGraph().reset_isNonVirusFree(nodeInd);// no longer non_virus_free
     }
-    for(int i =0; i<session.getGraph().getMatrix()[nodeInd].size();i++) {
+    int size=session.getGraph().getMatrix()[nodeInd].size();
+    for(int i =0; i<size;i++) {
         if (session.getGraph().getMatrix()[nodeInd][i] == 1 // check if this node is neighbor
             && !session.getGraph().isNonVirusFree(i) //check if not NonVirusFree
             && !session.getGraph().isInfected(i)) { //check if this node is not infected

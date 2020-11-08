@@ -37,7 +37,8 @@ void Graph::infectNode(int nodeInd) {
 }
 
 void Graph::isolateNode(int nodeInd) {
-    for (int i = 0; i<edges.size();i++){
+    int size=edges.size();
+    for (int i = 0; i<size;i++){
         this->edges[nodeInd][i]=0;
         this->edges[i][nodeInd]=0;
     }
