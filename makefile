@@ -2,7 +2,7 @@ all: main
 
 main: bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o
 	@echo 'Linking'
-	g++ -o bin/main bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o
+	g++ -o bin/cTrace bin/main.o bin/Agent.o bin/Graph.o bin/Session.o bin/Tree.o
 
 bin/main.o: src/main.cpp
 	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/main.o src/main.cpp
