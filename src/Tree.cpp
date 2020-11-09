@@ -36,6 +36,7 @@ const Tree & Tree::operator=(const Tree &other) {//  assignment operator
             this->children.push_back(oldChildren);
         return *this;
     }
+    else return *this;
 }
 const Tree & Tree::operator=(Tree &&other) {// move assignment operator
     if (this!=&other){
@@ -43,6 +44,7 @@ const Tree & Tree::operator=(Tree &&other) {// move assignment operator
         std::swap(children,other.children);
         return *this;
     }
+    else return *this;
 }
 
 
@@ -151,6 +153,7 @@ int RootTree::traceTree() {return node;}
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel){}//constructor
 MaxRankTree::MaxRankTree(const MaxRankTree &other):Tree(other) {}//copy constructor
 MaxRankTree::MaxRankTree(MaxRankTree &&other):Tree(other) {}//move constructor
+
 int MaxRankTree::traceTree() {
     return this->traverse(0).getNode();
 }
