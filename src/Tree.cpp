@@ -30,6 +30,7 @@ const Tree & Tree::operator=(const Tree &other) {//  assignment operator
     if (this!=&other){
         this->node=other.node;
         for(auto oldChildren : children)
+            if(oldChildren!=&other)
             delete oldChildren;
         this->children.clear();
         for(auto oldChildren : other.children)
