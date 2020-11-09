@@ -200,6 +200,6 @@ int CycleTree::traceTree() {
 };
 
 Tree& CycleTree::traverse(int num) {
-    if (this->children[0] && num >0 ) return this->children[0]->traverse(num-1);
+    if (!this->children.empty() && num >=0 ) return this->children[0]->traverse(num-1);
     else return *this;
 }
