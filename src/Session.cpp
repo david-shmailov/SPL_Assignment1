@@ -10,11 +10,10 @@
 using json = nlohmann::json;
 
 ////////Sessoin////////////
-Session::Session(const std::string& path):g(Graph()) {  // constructor
+Session::Session(const std::string& path):g(Graph()),treeType(),agents(),infected(queue()),cycle(0),non_virus_free() {  // constructor
     std::ifstream i(path);// check this problem
     json j;
     j=json ::parse(i);
-
     std::vector<std::vector<int>> matrix =j["graph"];
 
     g = Graph(matrix);
@@ -34,36 +33,39 @@ Session::Session(const std::string& path):g(Graph()) {  // constructor
             non_virus_free.push_back(t);
         }
     }
-     infected=queue();
+    infected=queue();
 
 
 }
 
-Session::Session(const Session &other) {// copy constructor
-    g = other.g;
-    treeType=other.treeType;
-    cycle=other.cycle;
-    infected=other.infected;
+Session::Session(const Session &other):g(other.g),treeType(other.treeType),agents(),
+                                       infected(other.infected),cycle(other.cycle),non_virus_free(){// copy constructor
     for (auto * otherAgent : other.agents ){
         Agent *n = otherAgent->clone();
-        agents.push_back(n);
-    }
+        agents.push_back(n);}
     for (auto * otherAgent : other.non_virus_free ){
         Agent *n = otherAgent->clone();
         non_virus_free.push_back(n);
     }
-    infected=queue();
 }
 
 Session::~Session(){// destructor
-    for (auto * addAgent : this->agents ){
-        if(addAgent)
-            delete addAgent;
+    for (auto * delAgent : this->agents ){
+        if(delAgent)
+            delete delAgent;
     }
     agents.clear();
+    for (auto * delAgent : this->non_virus_free ){
+        if(delAgent)
+            delete delAgent;
+    }
+    non_virus_free.clear();
 }
-Session::Session(Session &&other):g(other.g),treeType(other.treeType),cycle(other.cycle),
-     infected(other.infected),agents(other.agents),non_virus_free(other.non_virus_free){}// move constructor
+Session::Session(Session &&other):g(other.g),treeType(other.treeType),agents(other.agents),
+                                  infected(other.infected),cycle(other.cycle),non_virus_free(other.non_virus_free){// move constructor
+    other.agents.clear();
+    other.non_virus_free.clear();
+}
 
 
 
@@ -115,7 +117,7 @@ void Session::simulate() {
             curAgent->act(*this);
     }
     Session::makefile();
- }
+}
 
 
 
@@ -129,7 +131,7 @@ void Session::makefile() {// output function
     }
     j["infected"]=v;
     std::ofstream i("output.json");
-    j>>i;
+    i<<j;
 }
 
 void Session::enqueueInfected(int i) {infected.enqueue(i);}

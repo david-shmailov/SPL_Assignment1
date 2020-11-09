@@ -8,16 +8,16 @@
 //////////Tree//////////////
 Tree::Tree(int rootLabel) :node(rootLabel) ,children(){};//constructor
 
-Tree::Tree(const Tree &tree) {//copy constructor
-    node = tree.node;
+Tree::Tree(const Tree &tree):node(tree.node),children() {//copy constructor
     for(auto oldChildren : tree.children) {
         if(oldChildren){
             Tree *t=oldChildren->clone();
-        this->children.push_back(t);
+            this->children.push_back(t);
         }
     }
 }
-Tree::Tree(Tree &&other): node(other.node) ,children(other.children){};//move constructor
+Tree::Tree(Tree &&other): node(other.node) ,children(other.children){
+    other.children.clear();};//move constructor
 Tree::~Tree() { //destructor
     for(auto oldChildren : children){
         if(oldChildren){
@@ -25,10 +25,10 @@ Tree::~Tree() { //destructor
         }
 
     }
-     children.clear();
+    children.clear();
 }
 const Tree & Tree::operator=(const Tree &other) {//  assignment operator
-     this->node=other.node;
+    this->node=other.node;
     for(auto oldChildren : children)
         delete oldChildren;
     this->children.clear();
@@ -113,8 +113,8 @@ Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const S
             matrix[j][rootLabel]=0;
             Tree *t=recTree( matrix,j,session);
             if(t){
-            root->addChild(*t);
-            delete t;
+                root->addChild(*t);
+                delete t;
             }
         }
     }
@@ -158,8 +158,7 @@ Tree& MaxRankTree::traverse(int _depth) {
     int minDepth = depth;
     this->depth=_depth;
     Tree& currTree = *this;
-    int size=children.size();
-    for(int i =0; i<size; i++){
+    for(unsigned int i =0;i < children.size(); i++){
         Tree& nextTree = children[i]->traverse(_depth++);
         if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
             minDepth = nextTree.getDepth();

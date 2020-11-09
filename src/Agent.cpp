@@ -18,7 +18,7 @@ const Agent & Agent::operator=(const Agent &other) {//assignment operator
 
 
 //////////////////Virus/////////////////
-Virus::Virus(int nodeInd): nodeInd(nodeInd), Agent(){};// constructor
+Virus::Virus(int nodeInd): Agent(), nodeInd(nodeInd){};// constructor
 Virus::Virus(const Virus &v): Agent(v) ,nodeInd(v.nodeInd) {};// copy constructor
 Virus::Virus(Virus &&other):Agent(other),nodeInd(other.nodeInd) {}// move constructor
 Agent* Virus::clone() const{
