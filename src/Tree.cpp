@@ -23,24 +23,28 @@ Tree::~Tree() { //destructor
         if(oldChildren){
             delete oldChildren;
         }
-
     }
     children.clear();
 }
 const Tree & Tree::operator=(const Tree &other) {//  assignment operator
-    this->node=other.node;
-    for(auto oldChildren : children)
-        delete oldChildren;
-    this->children.clear();
-    for(auto oldChildren : other.children)
-        this->children.push_back(oldChildren);
-    return *this;
+    if (this!=&other){
+        this->node=other.node;
+        for(auto oldChildren : children)
+            delete oldChildren;
+        this->children.clear();
+        for(auto oldChildren : other.children)
+            this->children.push_back(oldChildren);
+        return *this;
+    }
 }
 const Tree & Tree::operator=(Tree &&other) {// move assignment operator
-    this->node=other.node;
-    std::swap(children,other.children);
-    return *this;
+    if (this!=&other){
+        this->node=other.node;
+        std::swap(children,other.children);
+        return *this;
+    }
 }
+
 
 
 int  Tree::getNode() const{
@@ -157,16 +161,16 @@ Tree& MaxRankTree::traverse(int _depth) {
     if (maxRank == 0){ return *this;}
     int minDepth = depth;
     this->depth=_depth;
-    Tree& currTree = *this;
+    Tree* currTree = this;
     for(unsigned int i =0;i < children.size(); i++){
         Tree& nextTree = children[i]->traverse(_depth++);
         if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
             minDepth = nextTree.getDepth();
-            currTree = nextTree; // TODO attempt to lower traverse times
-            maxRank = currTree.getRank();
+            currTree = &nextTree; // TODO attempt to lower traverse times
+            maxRank = currTree->getRank();
         }
     }
-    return currTree;
+    return *currTree;
 
 }
 
