@@ -168,7 +168,7 @@ Tree& MaxRankTree::traverse(int _depth) {
     Tree* currTree = this;
     for(unsigned int i =0;i < children.size(); i++){
         Tree& nextTree = children[i]->traverse(_depth++);
-        if(maxRank  <  nextTree.getRank() || (nextTree.getRank() && minDepth>nextTree.getDepth())){
+        if(maxRank  <  nextTree.getRank() || (nextTree.getRank()==maxRank && minDepth>nextTree.getDepth())){
             minDepth = nextTree.getDepth();
             currTree = &nextTree; // TODO attempt to lower traverse times
             maxRank = currTree->getRank();
