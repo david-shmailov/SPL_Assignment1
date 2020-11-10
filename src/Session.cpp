@@ -124,7 +124,7 @@ void Session::simulate() {
 
 void Session::makefile() {// output function
     json j;
-    j["Graph"]=g.getMatrix();
+    j["graph"]=g.getMatrix();
     std::vector<int> v;
     int size=g.getMatrix().size();
     for(int i=0;i<size;i++){
