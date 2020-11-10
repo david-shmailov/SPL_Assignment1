@@ -108,13 +108,14 @@ const Session & Session::operator=(Session &&other) {// move assignment operator
 
 void Session::simulate() {
     while (!non_virus_free.empty()) {
-        cycle++;
+
         for (auto inAgent : non_virus_free) {
             agents.push_back(inAgent); //append the non_virus_free with agent
         }
         non_virus_free.clear(); // clear this cycle non_virus_free
         for (auto curAgent : agents)
             curAgent->act(*this);
+        cycle++;
     }
     Session::makefile();
 }
