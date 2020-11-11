@@ -16,7 +16,7 @@ Session::Session(const std::string& path):g(Graph()),treeType(),agents(),infecte
     j=json ::parse(i);
     std::vector<std::vector<int>> matrix =j["graph"];
 
-    g = Graph(matrix);
+    setGraph(Graph(matrix));
     cycle=0;
     if(j["tree"]=="M") treeType=MaxRank; // initial treeType
     else if(j["tree"]=="R") treeType=Root;
