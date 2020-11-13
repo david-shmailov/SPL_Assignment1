@@ -6,37 +6,37 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Agent.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Agent.h
 Tree.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Tree.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Tree.h
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Graph.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Graph.h
 vector
 -
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Session.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Session.h
 iostream
 -
 fstream
 -
 json.hpp
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/json.hpp
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/json.hpp
 Graph.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Graph.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Graph.h
 Agent.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Agent.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Agent.h
 vector
 -
 string
 -
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Tree.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Tree.h
 vector
 -
 Session.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Session.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Session.h
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/json.hpp
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/json.hpp
 algorithm
 -
 cassert
@@ -370,33 +370,15 @@ limits
 type_traits
 -
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/src/Agent.cpp
-../include/Agent.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Agent.h
-
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/src/Graph.cpp
-../include/Graph.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Graph.h
-vector
--
-
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/src/Session.cpp
+/Users/lachmani/CLionProjects/SPL_Assignment1/src/Session.cpp
 iostream
 -
 fstream
 -
 ../include/Session.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Session.h
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Session.h
 
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/src/Tree.cpp
+/Users/lachmani/CLionProjects/SPL_Assignment1/src/Tree.cpp
 ../include/Tree.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Tree.h
-
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/src/main.cpp
-iostream
--
-../include/Session.h
-/mnt/c/Users/david/CLionProjects/SPL_Assignment1/include/Session.h
-fstream
--
+/Users/lachmani/CLionProjects/SPL_Assignment1/include/Tree.h
 
