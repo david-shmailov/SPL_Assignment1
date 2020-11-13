@@ -63,7 +63,7 @@ public:
     Graph & getGraph();
     int getCycle()const;
 
-    void enqueueInfected(int i);
+    void enqueueInfected(int);
     int dequeueInfected();
     bool isEmptyQueue();
     TreeType getTreeType() const;
