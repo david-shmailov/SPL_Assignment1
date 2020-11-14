@@ -27,7 +27,6 @@ public:
     int  getDepth() const;
 
     ///Setters:
-    void setDepth(int _depth);
     void addChild(const Tree& child);
 
     ///static functions:
@@ -36,11 +35,9 @@ public:
     static Tree* BFS(const Session&, int rootLabel);
 
     ///virtual functions:
-
     virtual Tree& traverse(int _depth)=0;
-    virtual int traceTree()=0; //
+    virtual int traceTree()=0;
     virtual Tree* clone() const =0;
-
 
 protected:  //Dolav said we can change this to protected
     int node;
@@ -57,10 +54,8 @@ public:
     const CycleTree& operator =(const CycleTree& other)=delete;// assignment operator
     const CycleTree& operator=(CycleTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    virtual Tree& traverse(int num);
     virtual Tree* clone() const;
-
-
+    virtual Tree& traverse(int num);
 private:
     int currCycle;
 
@@ -75,8 +70,8 @@ public:
     const MaxRankTree& operator =(const MaxRankTree& other)=delete;// assignment operator
     const MaxRankTree& operator=(MaxRankTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    virtual Tree& traverse(int _depth);
     virtual Tree* clone() const;
+    virtual Tree& traverse(int _depth);
 
 };
 
@@ -89,8 +84,8 @@ public:
     const RootTree& operator =(const RootTree& other)=delete;// assignment operator
     const RootTree& operator=(RootTree&& other)=delete;// move assignment operator
     virtual int traceTree();
-    virtual Tree& traverse(int num);
     virtual Tree* clone() const;
+    virtual Tree& traverse(int num);
 
 };
 
