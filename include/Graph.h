@@ -16,7 +16,7 @@ public:
     const Graph& operator =(const Graph& other);// assignment operator
     const Graph& operator=(Graph&& other);// move assignment operator
     std::vector<std::vector<int>> const getMatrix();
-    Graph();////to check delete this constructor
+    Graph();
 
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);

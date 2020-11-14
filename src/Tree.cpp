@@ -107,7 +107,7 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 }
 
 Tree* Tree::recTree(std::vector<std::vector<int>> &matrix, int rootLabel,const Session& session) {
-    Tree *root= createTree(session,rootLabel);//TODO delete root
+    Tree *root= createTree(session,rootLabel);
     int size=matrix[rootLabel].size();
     for (int j=0; j<size;j++ ){
         if(matrix[rootLabel][j]==1){
@@ -160,12 +160,12 @@ Tree& MaxRankTree::traverse(int _depth) {
     if (maxRank == 0){ return *this;}
     int minDepth = depth;
     this->depth=_depth;
-    Tree* currTree = this;
+    Tree* currTree = this; // working with pointer to avoid using copy assignment operator in the loop
     for(unsigned int i =0;i < children.size(); i++){
         Tree& nextTree = children[i]->traverse(_depth++);
         if(maxRank  <  nextTree.getRank() || (nextTree.getRank()==maxRank && minDepth>nextTree.getDepth())){
             minDepth = nextTree.getDepth();
-            currTree = &nextTree; // TODO attempt to lower traverse times
+            currTree = &nextTree;
             maxRank = currTree->getRank();
         }
     }
