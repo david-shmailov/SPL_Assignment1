@@ -17,8 +17,8 @@ public:
     Tree(const Tree &tree);// copy constructor
     virtual ~Tree();//destructor
     Tree(Tree && other);//move constructor
-    const Tree& operator =(const Tree& other);// assignment operator
-    const Tree& operator=(Tree&& other);// move assignment operator TODO make sure const is at the right position
+    Tree& operator =(const Tree& other);// assignment operator
+    Tree& operator=(Tree&& other);// move assignment operator
 
 
     ///Getters:
@@ -30,7 +30,7 @@ public:
     void addChild(const Tree& child);
 
     ///static functions:
-    static Tree* recTree(std::vector<std::vector<int>> &matrix,int rootLabel, const Session& session); //TODO consider making this private.
+    static Tree* recTree(std::vector<std::vector<int>> &matrix,int rootLabel, const Session& session);
     static Tree* createTree(const Session& session, int rootLabel);
     static Tree* BFS(const Session&, int rootLabel);
 

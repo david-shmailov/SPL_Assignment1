@@ -5,7 +5,7 @@
 #include "../include/Graph.h"
 #include <vector>
 
-// TODO test this
+
 Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix) //constructor
         , infected(std::vector<bool> (edges.size(),false))
         ,isNon_virus_free(std::vector<bool> (edges.size(),false)){}
