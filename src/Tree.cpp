@@ -26,7 +26,7 @@ Tree::~Tree() { //destructor
     }
     children.clear();
 }
-const Tree & Tree::operator=(const Tree &other) {//  assignment operator
+Tree & Tree::operator=(const Tree &other) {//  assignment operator
     if (this!=&other){
         this->node=other.node;
         for(auto oldChildren : children)
@@ -39,7 +39,7 @@ const Tree & Tree::operator=(const Tree &other) {//  assignment operator
     }
     else return *this;
 }
-const Tree & Tree::operator=(Tree &&other) {// move assignment operator
+Tree & Tree::operator=(Tree &&other) {// move assignment operator
     if (this!=&other){
         this->node=other.node;
         std::swap(children,other.children);
@@ -63,8 +63,8 @@ int  Tree::getDepth() const{
 
 Tree * Tree::BFS(const Session &session, int rootLabel){
     Graph g=session.getGraphConst(); //edges
-    std::vector<std::vector<int>> edges = g.getMatrix();//edges //TODO make sure this uses copy constructor and does not give a pointer of the original matrix
-    std::vector<std::vector<int>> BFSTree(edges.size(), std::vector<int>(edges.size(), 0)); // init 2D nxn matrix of 0s on stack. //TODO make sure this is on stack
+    std::vector<std::vector<int>> const &edges = g.getMatrix();//edges
+    std::vector<std::vector<int>> BFSTree(edges.size(), std::vector<int>(edges.size(), 0)); // init 2D nxn matrix of 0s on stack.
     std::vector<bool> visited = std::vector<bool>(edges.size(), false);
     std::vector<int> queue;
     visited[rootLabel] = true;
@@ -75,7 +75,7 @@ Tree * Tree::BFS(const Session &session, int rootLabel){
         queue.erase(queue.begin());
         int size=edges.size();
         for (int i = 0; i < size; i++) {
-            if (edges[visiting][i] == 1 && (!visited[i])) { //TODO implement the note from the assignment about visit order by indicies
+            if (edges[visiting][i] == 1 && (!visited[i])) {
                 queue.push_back(i);
                 visited[i] = true;
                 BFSTree[visiting][i]=1;
